@@ -2,15 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : SingletonMonobehavior<Player>
+public class Player : SingletonUnitBase<Player>
 {
     public GameObject projectile;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject gameOverPrefab;
 
     public Vector2 GetPosition()
     {
@@ -18,7 +13,7 @@ public class Player : SingletonMonobehavior<Player>
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
@@ -26,5 +21,33 @@ public class Player : SingletonMonobehavior<Player>
             obj.Create(GetPosition(), new Vector2(1, 0));
         }
 
+        base.Update();
+    }
+
+    private void DisplayGameOverScreen()
+    {
+        gameOverPrefab.SetActive(true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var item in enemies)
+            {
+                Destroy(item.gameObject);
+            }
+
+
+            var player = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var item in player)
+            {
+                Destroy(item.gameObject);
+            }
+
+            DisplayGameOverScreen();
+        }
     }
 }

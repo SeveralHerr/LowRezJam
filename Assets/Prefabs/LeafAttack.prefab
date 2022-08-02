@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7814117667022581406}
   - component: {fileID: 6786439981612378803}
-  - component: {fileID: 8206400981061477797}
   - component: {fileID: 7067598050624159879}
   - component: {fileID: 7775436893517139166}
+  - component: {fileID: 4675676033694453673}
   m_Layer: 0
   m_Name: LeafAttack
   m_TagString: Untagged
@@ -62,19 +62,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.0163271, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8206400981061477797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4370262421692245836}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec8c6469759a5345a6951ac2a23a808, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
 --- !u!50 &7067598050624159879
 Rigidbody2D:
   serializedVersion: 4
@@ -110,6 +97,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4370262421692245836}
   speed: 150
+--- !u!114 &4675676033694453673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370262421692245836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4faabc9da849bd5468344378de5398e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MovementSpeed>k__BackingField: 150
 --- !u!1 &8178723356136812276
 GameObject:
   m_ObjectHideFlags: 0
