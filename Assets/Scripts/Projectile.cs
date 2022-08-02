@@ -37,9 +37,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public Projectile Create(Vector2 initialPosition, Vector2 direction)
+    public Projectile Create(Vector2 initialPosition, Vector2 direction, float rotation = 0f)
     {
-        var newObject = Instantiate(Prefab, initialPosition, Quaternion.identity) as GameObject;
+        var newObject = Instantiate(Prefab, initialPosition, Quaternion.Euler(0f, 0f, rotation)) as GameObject;
         var obj = newObject.GetComponent<Projectile>();
         obj.SetDirection(direction);
         return obj;
