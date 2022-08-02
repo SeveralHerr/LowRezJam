@@ -25,6 +25,19 @@ public class Player : SingletonUnitBase<Player>
             obj.Create(positionOffset, new Vector2(1, 0));
         }
 
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            // pause
+            if (Time.timeScale == 1)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+        }
+
         base.Update();
     }
 
