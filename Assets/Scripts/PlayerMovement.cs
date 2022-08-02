@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 1f;
-
-    public Rigidbody2D rb;
-
     Vector2 movement;
 
     private void Update()
@@ -16,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * speed);
+        
+        Player.Instance.MovePosition(movement);
     }
+
+
 }
