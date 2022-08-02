@@ -54,6 +54,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            Score.Instance.currentScore += 1;
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

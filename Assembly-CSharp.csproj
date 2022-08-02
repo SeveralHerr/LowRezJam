@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\UnitBase.cs" />
     <Compile Include="Assets\Scripts\Behaviors\MovementBehavior.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
+    <Compile Include="Assets\Scripts\Score.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

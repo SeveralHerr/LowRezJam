@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7067598050624159879}
   - component: {fileID: 7775436893517139166}
   - component: {fileID: 4675676033694453673}
+  - component: {fileID: 5267223983755605281}
   m_Layer: 0
   m_Name: LeafAttack
   m_TagString: Untagged
@@ -96,7 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4370262421692245836}
-  speed: 150
 --- !u!114 &4675676033694453673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +110,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MovementSpeed>k__BackingField: 150
+--- !u!210 &5267223983755605281
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370262421692245836}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
 --- !u!1 &8178723356136812276
 GameObject:
   m_ObjectHideFlags: 0

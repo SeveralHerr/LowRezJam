@@ -18,7 +18,11 @@ public class Player : SingletonUnitBase<Player>
         if(Input.GetMouseButtonDown(0))
         {
             var obj = projectile.GetComponent<Projectile>();
-            obj.Create(GetPosition(), new Vector2(1, 0));
+
+            // fires out of mouth
+            var positionOffset = GetPosition() + new Vector2(1, 1);
+
+            obj.Create(positionOffset, new Vector2(1, 0));
         }
 
         base.Update();
