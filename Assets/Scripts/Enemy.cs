@@ -11,9 +11,12 @@ public class Enemy : UnitBase
         MoveTowardsPlayer();
         base.Update();
     }
-
     private void MoveTowardsPlayer()
     {
+        if(Player.Instance == null)
+        {
+            return;
+        }
         MoveTowardsTarget(Position, Player.Instance.Position);
     }
 }
