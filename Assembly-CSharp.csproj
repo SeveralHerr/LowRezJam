@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\SingletonMonobehavior.cs" />
     <Compile Include="Assets\Scripts\UnitBase.cs" />
     <Compile Include="Assets\Scripts\Behaviors\MovementBehavior.cs" />
+    <Compile Include="Assets\Scripts\Map.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

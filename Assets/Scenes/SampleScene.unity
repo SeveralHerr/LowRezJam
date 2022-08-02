@@ -499,9 +499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0adbdc6be6c1d9448cf7b1bc6ca0da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  rb: {fileID: 221450465}
-  gameOverPrefab: {fileID: 269809550}
 --- !u!50 &221450465
 Rigidbody2D:
   serializedVersion: 4
@@ -536,6 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 4370262421692245836, guid: a0f702f0c6f102c46b77c30d5855be93, type: 3}
+  gameOverPrefab: {fileID: 269809550}
 --- !u!114 &221450467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,8 +768,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1020438848}
   - component: {fileID: 1020438847}
+  - component: {fileID: 1020438849}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -844,6 +843,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1020438849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020438846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d8c5d95b9d77049854486e358302bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1050626423
 GameObject:
   m_ObjectHideFlags: 0

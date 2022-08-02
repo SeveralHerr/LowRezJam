@@ -25,6 +25,16 @@ public class Projectile : MonoBehaviour
         }
 
         MovementBehavior.MoveTowards(Direction);
+
+        PurgeWhenOutOfBounds();
+    }
+
+    public void PurgeWhenOutOfBounds()
+    {
+        if(Map.Instance.IsOutOfBounds( MovementBehavior.GetPosition() ))
+        {
+            Destroy(gameObject);
+        }
     }
 
     public Projectile Create(Vector2 initialPosition, Vector2 direction)
