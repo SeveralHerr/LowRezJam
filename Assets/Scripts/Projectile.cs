@@ -6,14 +6,14 @@ public class Projectile : MonoBehaviour
 {
     public Object Prefab;
 
-    public MovementBehavior MovementBehavior { get; set; }
+    public MovementBehavior MovementBehavior;
 
     private Vector2 Direction { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        MovementBehavior = GetComponent<MovementBehavior>();
+        
     }
 
     // Update is called once per frame
@@ -37,10 +37,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public Projectile Create(Vector2 initialPosition, Vector2 direction, float rotation = 0f)
+    public Projectile Create(Vector2 initialPosition, Vector2 direction, float speed, float rotation = 0f)
     {
         var newObject = Instantiate(Prefab, initialPosition, Quaternion.Euler(0f, 0f, rotation)) as GameObject;
         var obj = newObject.GetComponent<Projectile>();
+        obj.MovementBehavior.MovementSpeed = speed;
         obj.SetDirection(direction);
         return obj;
     }
@@ -56,7 +57,11 @@ public class Projectile : MonoBehaviour
         {
             Score.Instance.currentScore += 1;
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+
+            if(!Player.Instance.HasPiercing)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

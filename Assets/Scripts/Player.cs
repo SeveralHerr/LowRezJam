@@ -6,8 +6,12 @@ public class Player : SingletonUnitBase<Player>
 {
     public GameObject projectile;
     public GameObject gameOverPrefab;
+    public GameObject levelUpPrefab;
 
     public Direction Direction;
+
+    public bool HasPiercing = false;
+    public float ProjectileAttackSpeed = 150f;
 
     public Vector2 GetPosition()
     {
@@ -21,6 +25,11 @@ public class Player : SingletonUnitBase<Player>
         if(Input.GetMouseButtonDown(0))
         {
             FireProjectile();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+          levelUpPrefab.SetActive(true);
         }
 
         if(Input.GetKeyDown(KeyCode.P))
@@ -119,7 +128,7 @@ public class Player : SingletonUnitBase<Player>
             rotation = 90f;
         }
 
-        obj.Create(positionOffset, direction, rotation);
+        obj.Create(positionOffset, direction, ProjectileAttackSpeed, rotation);
     }
 
  

@@ -4,8 +4,7 @@ public class MovementBehavior : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    [field: SerializeField] 
-    public float MovementSpeed { get; set; }
+    public float MovementSpeed;
 
     private void Start()
     {
