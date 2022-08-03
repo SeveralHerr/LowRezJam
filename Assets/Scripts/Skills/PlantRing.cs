@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlantRing : MonoBehaviour 
 {
     public GameObject prefab;
-    public float lifetime = 2f;
+    public float lifetime = .5f;
 
     public PlantRing Create(Vector2 initialPosition)
     {
@@ -14,6 +14,7 @@ public class PlantRing : MonoBehaviour
 
     private void Update()
     {
+        transform.position = Player.Instance.Position;
         lifetime -= Time.deltaTime;
         if(lifetime <= 0)
         {

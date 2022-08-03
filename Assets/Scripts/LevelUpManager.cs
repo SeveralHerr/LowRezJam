@@ -23,7 +23,9 @@ public class LevelUpManager : MonoBehaviour
             scoreTenRunOnce = true;
 
             var obj = Instantiate(levelUpPrefab);
-            SetupButton("Button1", "+Piercing", new PiercingSkill(), obj);
+            //SetupButton("Button1", "+Piercing", new PiercingSkill(), obj);
+            // SetupButton("Button1", "+Rose", null, obj, nameof(RoseSpawner));
+            SetupButton("Button1", "+Puff", null, obj, "PuffballSpawner");
             SetupButton("Button2", "+Atk Spd", new AttackSpeed(), obj);
             SetupButton("Button3", "+4 leaf", null, obj, nameof(FourWayLeafAttack));
         }
