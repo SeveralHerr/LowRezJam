@@ -41,12 +41,21 @@ public class LevelUpManager : MonoBehaviour
             button2LevelUp.skill = new AttackSpeed();
             button2LevelUp.ui = obj;
 
+            //var button3 = GameObject.FindGameObjectWithTag("Button3");
+
+            //var button3LevelUp = button3.GetComponentInChildren<LevelUp>();
+            //button3LevelUp.boxText.text = "+4 leaf";
+            //button3LevelUp.skill = gameObject.AddComponent<FourWayLeafAttack>();
+            //button3LevelUp.ui = obj;
+
             var button3 = GameObject.FindGameObjectWithTag("Button3");
 
             var button3LevelUp = button3.GetComponentInChildren<LevelUp>();
-            button3LevelUp.boxText.text = "+4 leaf";
-            button3LevelUp.skill = gameObject.AddComponent<FourWayLeafAttack>();
+            button3LevelUp.boxText.text = "+Puff";
+            button3LevelUp.skill = gameObject.AddComponent<Puffball>();
             button3LevelUp.ui = obj;
         }
     }
+
+    //private void SetupButton()
 }

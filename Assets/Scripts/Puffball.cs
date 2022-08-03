@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FourWayLeafAttack : MonoBehaviour, ISkill
+public class Puffball : MonoBehaviour, ISkill
 {
-    public GameObject leafAttackPrefab;
+    public GameObject puffballPrefab;
 
     private float nextWaveSpawnTimer;
     public float waveTimer = 10f;
@@ -14,7 +14,7 @@ public class FourWayLeafAttack : MonoBehaviour, ISkill
     {
         nextWaveSpawnTimer = 3f;
 
-        leafAttackPrefab = Resources.Load("Prefabs/LeafAttack") as GameObject;
+        puffballPrefab = Resources.Load("Prefabs/Puffball") as GameObject;
     }
 
     // Update is called once per frame
@@ -31,8 +31,8 @@ public class FourWayLeafAttack : MonoBehaviour, ISkill
 
     private void SpawnProjectiles()
     {
-        var obj = leafAttackPrefab.GetComponent<Projectile>();
-        var positionOffset =  Player.Instance.Position + new Vector2(1, 1);
+        var obj = puffballPrefab.GetComponent<Projectile>();
+        var positionOffset = Player.Instance.Position + new Vector2(1, 1);
 
         obj.Create(positionOffset, new Vector2(1, 0), Player.Instance.ProjectileAttackSpeed, 0);
         obj.Create(positionOffset, new Vector2(-1, 0), Player.Instance.ProjectileAttackSpeed, 0);
@@ -42,6 +42,6 @@ public class FourWayLeafAttack : MonoBehaviour, ISkill
 
     public void LearnSkill()
     {
-        Player.Instance.gameObject.AddComponent<FourWayLeafAttack>();
+        Player.Instance.gameObject.AddComponent<Puffball>();
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\LevelUp.cs" />
     <Compile Include="Assets\Scripts\Skills\FourWayLeafAttack.cs" />
     <Compile Include="Assets\Scripts\PlayerScriptAttacher.cs" />
+    <Compile Include="Assets\Scripts\Puffball.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
