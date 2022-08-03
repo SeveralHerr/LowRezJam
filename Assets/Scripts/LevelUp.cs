@@ -26,10 +26,14 @@ public class LevelUp : MonoBehaviour, IPointerClickHandler
             var obj = Resources.Load($"Prefabs/{prefabSkill}") as GameObject;
             var skill = obj.GetComponent<ISkill>();
             skill.LearnSkill();
+            var sg = Player.Instance.SkillGroup.GetNextSkill(skill, prefabSkill);
+            sg.isComplete = true;
         }
         else
         {
             skill.LearnSkill();
+            var sg = Player.Instance.SkillGroup.GetNextSkill(skill, prefabSkill);
+            sg.isComplete = true;
         }
 
         Time.timeScale = 1;

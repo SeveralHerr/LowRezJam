@@ -11,11 +11,19 @@ public class Player : SingletonUnitBase<Player>
     public Direction Direction;
 
     public bool HasPiercing = false;
-    public float ProjectileAttackSpeed = 150f;
+    public float ProjectileAttackSpeed = 2f;
+
+    public SkillGroup SkillGroup;
 
     public Vector2 GetPosition()
     {
         return transform.position;
+    }
+
+    public override void Start()
+    {
+        SkillGroup = new SkillGroup();
+        base.Start();
     }
 
     // Update is called once per frame

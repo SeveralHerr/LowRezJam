@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\LevelUp.cs" />
     <Compile Include="Assets\Scripts\Skills\RoseSpawner.cs" />
     <Compile Include="Assets\Scripts\Skills\Rose.cs" />
+    <Compile Include="Assets\Scripts\SkillGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
