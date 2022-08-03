@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4370262421692245836}
+  MovementBehavior: {fileID: 4675676033694453673}
 --- !u!114 &4675676033694453673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4faabc9da849bd5468344378de5398e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MovementSpeed>k__BackingField: 150
+  MovementSpeed: 0
 --- !u!210 &5267223983755605281
 SortingGroup:
   m_ObjectHideFlags: 0

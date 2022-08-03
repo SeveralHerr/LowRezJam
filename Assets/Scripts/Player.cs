@@ -6,6 +6,12 @@ public class Player : SingletonUnitBase<Player>
 {
     public GameObject projectile;
     public GameObject gameOverPrefab;
+    public GameObject levelUpPrefab;
+
+    public Direction Direction;
+
+    public bool HasPiercing = false;
+    public float ProjectileAttackSpeed = 150f;
 
     public Vector2 GetPosition()
     {
@@ -15,14 +21,15 @@ public class Player : SingletonUnitBase<Player>
     // Update is called once per frame
     public override void Update()
     {
+      
         if(Input.GetMouseButtonDown(0))
         {
-            var obj = projectile.GetComponent<Projectile>();
+            FireProjectile();
+        }
 
-            // fires out of mouth
-            var positionOffset = GetPosition() + new Vector2(1, 1);
-
-            obj.Create(positionOffset, new Vector2(1, 0));
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+          levelUpPrefab.SetActive(true);
         }
 
         if(Input.GetKeyDown(KeyCode.P))
@@ -41,6 +48,90 @@ public class Player : SingletonUnitBase<Player>
         base.Update();
     }
 
+    private void MouseDir()
+    {
+        var worldPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var position = (worldPosition - Position).normalized;
+
+        if (position.x > 0 && position.y < 0)
+        {
+            if(position.x > Mathf.Abs(position.y))
+            {
+                Direction = Direction.Right;
+            }
+            else
+            {
+                Direction = Direction.Down;
+            }
+        }
+        if(position.x < 0 && position.y < 0)
+        {
+            if(Mathf.Abs(position.x) > Mathf.Abs(position.y))
+            {
+                Direction = Direction.Left;
+            }
+            else
+            {
+                Direction = Direction.Down;
+            }
+        }
+        if(position.x > 0 && position.y > 0)
+        {
+            if(position.x > position.y)
+            {
+                Direction = Direction.Right;
+            }
+            else
+            {
+                Direction = Direction.Up;
+            }
+        }
+        if(position.x < 0 && position.y > 0)
+        {
+            if(Mathf.Abs(position.x) > position.y)
+            {
+                Direction = Direction.Left;
+            }
+            else
+            {
+                Direction = Direction.Up;
+            }
+        }
+    }
+
+    private void FireProjectile()
+    {
+        MouseDir();
+        var obj = projectile.GetComponent<Projectile>();
+
+        // fires out of mouth
+        var positionOffset = GetPosition() + new Vector2(1, 1);
+
+        var direction = new Vector2();
+        var rotation = 0f;
+        if (Direction == Direction.Right)
+        {
+            direction = new Vector2(1, 0);
+        }
+        else if (Direction == Direction.Left)
+        {
+            direction = new Vector2(-1, 0);
+        }
+        else if (Direction == Direction.Up)
+        {
+            direction = new Vector2(0, 1);
+            rotation = 90f;
+        }
+        else if (Direction == Direction.Down)
+        {
+            direction = new Vector2(0, -1);
+            rotation = 90f;
+        }
+
+        obj.Create(positionOffset, direction, ProjectileAttackSpeed, rotation);
+    }
+
+ 
     private void DisplayGameOverScreen()
     {
         gameOverPrefab.SetActive(true);
