@@ -8,9 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
-    <ProjectGuid>{25CBB433-B33C-022F-96AC-9985443643BF}</ProjectGuid>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{F07B2441-D2DA-5640-096E-66639098B4AA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -76,6 +75,8 @@
     <Compile Include="Assets\Scripts\Skills\FourWayLeafAttack.cs" />
     <Compile Include="Assets\Scripts\PlayerScriptAttacher.cs" />
     <Compile Include="Assets\Scripts\Puffball.cs" />
+    <Compile Include="Assets\Scripts\Skills\PlantRing.cs" />
+    <Compile Include="Assets\Scripts\Skills\PlantRingSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class LevelUpManager : MonoBehaviour
@@ -24,7 +25,7 @@ public class LevelUpManager : MonoBehaviour
             var obj = Instantiate(levelUpPrefab);
             SetupButton("Button1", "+Piercing", new PiercingSkill(), obj);
             SetupButton("Button2", "+Atk Spd", new AttackSpeed(), obj);
-            SetupButton("Button3", "+4 leaf", Player.Instance.gameObject.AddComponent<FourWayLeafAttack>(), obj);
+            SetupButton("Button3", "+4 leaf", null, obj, nameof(FourWayLeafAttack));
         }
 
         if(Score.Instance.currentScore == 6 && scoreTwentyRunOnce == false)
@@ -33,13 +34,13 @@ public class LevelUpManager : MonoBehaviour
             scoreTwentyRunOnce = true;
 
             var obj = Instantiate(levelUpPrefab);
-            SetupButton("Button1", "+Puff", Player.Instance.gameObject.AddComponent<Puffball>(), obj);
+            SetupButton("Button1", "+Puff", null, obj, nameof(Puffball));
             SetupButton("Button2", "+Atk Spd", new AttackSpeed(), obj);
-            SetupButton("Button3", "+Atk Spd", new AttackSpeed(), obj);
+            SetupButton("Button3", "+Ring", null, obj, nameof(PlantRingSpawner));
         }
     }
 
-    private void SetupButton(string levelupButton, string text, ISkill skill, GameObject parent)
+    private void SetupButton(string levelupButton, string text, ISkill skill, GameObject parent, string prefab = null)
     {
         var button3 = GameObject.FindGameObjectWithTag(levelupButton);
 
@@ -47,5 +48,10 @@ public class LevelUpManager : MonoBehaviour
         button3LevelUp.boxText.text = text;
         button3LevelUp.skill = skill;
         button3LevelUp.ui = parent;
+
+        if(!string.IsNullOrEmpty(prefab))
+        {
+            button3LevelUp.prefabSkill = prefab;
+        }
     }
 }
