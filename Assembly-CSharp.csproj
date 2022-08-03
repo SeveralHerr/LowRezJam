@@ -64,14 +64,16 @@
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
-    <Compile Include="Assets\Scripts\Piercing.cs" />
+    <Compile Include="Assets\Scripts\Skills\Piercing.cs" />
     <Compile Include="Assets\Scripts\SingletonMonobehavior.cs" />
-    <Compile Include="Assets\Scripts\AttackSpeed.cs" />
+    <Compile Include="Assets\Scripts\Skills\AttackSpeed.cs" />
     <Compile Include="Assets\Scripts\MovementEventHandler.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
     <Compile Include="Assets\Scripts\Behaviors\MovementBehavior.cs" />
     <Compile Include="Assets\Scripts\LevelUp.cs" />
+    <Compile Include="Assets\Scripts\Skills\FourWayLeafAttack.cs" />
+    <Compile Include="Assets\Scripts\PlayerScriptAttacher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
