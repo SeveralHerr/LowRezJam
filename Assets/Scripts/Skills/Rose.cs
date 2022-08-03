@@ -18,7 +18,7 @@ public class Rose : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
         lifetime -= Time.deltaTime;
         if (lifetime <= 0)
         {
