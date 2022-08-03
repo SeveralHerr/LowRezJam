@@ -156,13 +156,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4171760109440485271}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e380ee4129e352348a2565a8f60fccb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puffballPrefab: {fileID: 0}
-  waveTimer: 10
+  prefab: {fileID: 4171760109440485271}
+  MovementBehavior: {fileID: 7661882514986340928}
 --- !u!114 &5445599236325990726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4171760109440485271}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7415c311a591cf54fbb74c4d15c9ebd8, type: 3}
   m_Name: 

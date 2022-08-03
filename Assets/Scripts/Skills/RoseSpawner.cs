@@ -6,7 +6,7 @@ public class RoseSpawner : MonoBehaviour, ISkill
 {
     public GameObject rosePrefab;
 
-    private float timer = 5f;
+    private float timer = 3f;
 
 
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class RoseSpawner : MonoBehaviour, ISkill
         if (timer <= 0f)
         {
             SpawnRose();
-            timer = 5f;
+            timer = 3f;
         }
     }
 

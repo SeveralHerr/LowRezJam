@@ -36,28 +36,7 @@ public class LevelUpManager : MonoBehaviour
             SetupButton("Button1", random1, obj);
             SetupButton("Button2", random2, obj);
             SetupButton("Button3", random3, obj);
-            
-            
-
-            //SetupButton("Button1", "+Piercing", new PiercingSkill(), obj);
-            //// SetupButton("Button1", "+Rose", null, obj, nameof(RoseSpawner));
-
-            //SetupButton("Button2", "+Atk Spd", new AttackSpeed(), obj);
-            //SetupButton("Button3", "+4 leaf", null, obj, nameof(FourWayLeafAttack));
         }
-
-        //if (Score.Instance.currentScore == 3 && scoreTenRunOnce == false)
-        //{
-        //    Time.timeScale = 0;
-        //    scoreTenRunOnce = true;
-
-        //    var obj = Instantiate(levelUpPrefab);
-        //    SetupButton("Button1", "+Piercing", new PiercingSkill(), obj);
-        //    // SetupButton("Button1", "+Rose", null, obj, nameof(RoseSpawner));
-   
-        //    SetupButton("Button2", "+Atk Spd", new AttackSpeed(), obj);
-        //    SetupButton("Button3", "+4 leaf", null, obj, nameof(FourWayLeafAttack));
-        //}
 
         if(Score.Instance.currentScore == 6 && scoreTwentyRunOnce == false)
         {
@@ -65,9 +44,6 @@ public class LevelUpManager : MonoBehaviour
             scoreTwentyRunOnce = true;
 
             var obj = Instantiate(levelUpPrefab);
-            //SetupButton("Button1", "+Puff", null, obj, "PuffballSpawner");
-            //SetupButton("Button2", "+Atk Spd", new AttackSpeed(), obj);
-            //SetupButton("Button3", "+Ring", null, obj, nameof(PlantRingSpawner));
 
             var skills = Player.Instance.SkillGroup;
 

@@ -12,8 +12,13 @@ public class SkillGroup
         new Skill { skill = new AttackSpeed(), order = 1, shortName = "+Atk Spd" }
     };
     private List<Skill> _plantRingList = new() { new Skill { skillPrefab = nameof(PlantRingSpawner), order = 0, shortName = "+Ring" } };
+    private List<Skill> _puffballList = new() { new Skill { skillPrefab = nameof(PuffballSpawner), order = 0, shortName = "+Puff" } };
+    private List<Skill> _roseList = new()
+        { new Skill { skillPrefab = nameof(RoseSpawner), order = 0, shortName = "+Rose" },
+         new Skill { skillPrefab = nameof(RoseSpawner), order = 1, shortName = "+Rose" } 
+     };
 
-    public List<List<Skill>> skills => new() { _skillPiercingList, _plantRingList, _attackSpeedList };
+    public List<List<Skill>> skills => new() { _skillPiercingList, _plantRingList, _attackSpeedList, _puffballList, _roseList };
 
     public Skill GetNextSkill(ISkill skill, string prefab)
     {
