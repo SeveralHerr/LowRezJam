@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class LevelUpManager : MonoBehaviour
@@ -21,7 +22,7 @@ public class LevelUpManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Score.Instance.currentScore == 10 && scoreTenRunOnce == false)
+        if(Score.Instance.currentScore == 3 && scoreTenRunOnce == false)
         {
             Time.timeScale = 0;
             scoreTenRunOnce = true;
@@ -54,6 +55,8 @@ public class LevelUpManager : MonoBehaviour
             button3LevelUp.boxText.text = "+Puff";
             button3LevelUp.skill = gameObject.AddComponent<Puffball>();
             button3LevelUp.ui = obj;
+
+     
         }
     }
 

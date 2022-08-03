@@ -10,10 +10,13 @@ public class LevelUp : MonoBehaviour, IPointerClickHandler
     public TextMeshProUGUI boxText;
     public ISkill skill;
 
+
     public void Start()
     {
         boxText = GetComponentInChildren<TextMeshProUGUI>();
     }
+
+
     public void OnPointerClick(PointerEventData eventData)
     {
         skill.LearnSkill();
