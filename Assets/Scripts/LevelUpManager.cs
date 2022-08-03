@@ -1,17 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class LevelUpManager : MonoBehaviour
 {
     public GameObject levelUpPrefab;
 
-    //private GameObject Button1;
-    //private GameObject Button2;
-    //private GameObject Button3;
-
     public bool scoreTenRunOnce = false;
+    public bool scoreTwentyRunOnce = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,37 +22,30 @@ public class LevelUpManager : MonoBehaviour
             scoreTenRunOnce = true;
 
             var obj = Instantiate(levelUpPrefab);
-            var button1 = GameObject.FindGameObjectWithTag("Button1");
+            SetupButton("Button1", "+Piercing", new PiercingSkill(), obj);
+            SetupButton("Button2", "+Atk Spd", new AttackSpeed(), obj);
+            SetupButton("Button3", "+4 leaf", Player.Instance.gameObject.AddComponent<FourWayLeafAttack>(), obj);
+        }
 
-            var button1LevelUp = button1.GetComponentInChildren<LevelUp>();
-            button1LevelUp.boxText.text = "+Piercing";
-            button1LevelUp.skill = new PiercingSkill();
-            button1LevelUp.ui = obj;
+        if(Score.Instance.currentScore == 6 && scoreTwentyRunOnce == false)
+        {
+            Time.timeScale = 0;
+            scoreTwentyRunOnce = true;
 
-            var button2 = GameObject.FindGameObjectWithTag("Button2");
-
-            var button2LevelUp = button2.GetComponentInChildren<LevelUp>();
-            button2LevelUp.boxText.text = "+Atk Spd";
-            button2LevelUp.skill = new AttackSpeed();
-            button2LevelUp.ui = obj;
-
-            //var button3 = GameObject.FindGameObjectWithTag("Button3");
-
-            //var button3LevelUp = button3.GetComponentInChildren<LevelUp>();
-            //button3LevelUp.boxText.text = "+4 leaf";
-            //button3LevelUp.skill = gameObject.AddComponent<FourWayLeafAttack>();
-            //button3LevelUp.ui = obj;
-
-            var button3 = GameObject.FindGameObjectWithTag("Button3");
-
-            var button3LevelUp = button3.GetComponentInChildren<LevelUp>();
-            button3LevelUp.boxText.text = "+Puff";
-            button3LevelUp.skill = gameObject.AddComponent<Puffball>();
-            button3LevelUp.ui = obj;
-
-     
+            var obj = Instantiate(levelUpPrefab);
+            SetupButton("Button1", "+Puff", Player.Instance.gameObject.AddComponent<Puffball>(), obj);
+            SetupButton("Button2", "+Atk Spd", new AttackSpeed(), obj);
+            SetupButton("Button3", "+Atk Spd", new AttackSpeed(), obj);
         }
     }
 
-    //private void SetupButton()
+    private void SetupButton(string levelupButton, string text, ISkill skill, GameObject parent)
+    {
+        var button3 = GameObject.FindGameObjectWithTag(levelupButton);
+
+        var button3LevelUp = button3.GetComponentInChildren<LevelUp>();
+        button3LevelUp.boxText.text = text;
+        button3LevelUp.skill = skill;
+        button3LevelUp.ui = parent;
+    }
 }
