@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 9180244974475889838}
   - component: {fileID: 4533926688475950539}
   - component: {fileID: 7037744617695601110}
-  - component: {fileID: 6256389354373905436}
   - component: {fileID: 7661882514986340928}
+  - component: {fileID: 7176009476467820749}
+  - component: {fileID: 5445599236325990726}
   m_Layer: 0
   m_Name: Puffball
   m_TagString: Untagged
@@ -135,20 +136,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
---- !u!114 &6256389354373905436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171760109440485271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7415c311a591cf54fbb74c4d15c9ebd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Prefab: {fileID: 4171760109440485271}
-  MovementBehavior: {fileID: 7661882514986340928}
 --- !u!114 &7661882514986340928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,3 +149,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 500
+--- !u!114 &7176009476467820749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171760109440485271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e380ee4129e352348a2565a8f60fccb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4171760109440485271}
+  MovementBehavior: {fileID: 7661882514986340928}
+--- !u!114 &5445599236325990726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171760109440485271}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7415c311a591cf54fbb74c4d15c9ebd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 4171760109440485271}
+  MovementBehavior: {fileID: 7661882514986340928}

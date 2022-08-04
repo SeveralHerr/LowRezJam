@@ -11,11 +11,19 @@ public class Player : SingletonUnitBase<Player>
     public Direction Direction;
 
     public bool HasPiercing = false;
-    public float ProjectileAttackSpeed = 150f;
+    public float ProjectileAttackSpeed = 1f;
+
+    public SkillGroup SkillGroup;
 
     public Vector2 GetPosition()
     {
         return transform.position;
+    }
+
+    public override void Start()
+    {
+        SkillGroup = new SkillGroup();
+        base.Start();
     }
 
     // Update is called once per frame
@@ -105,7 +113,13 @@ public class Player : SingletonUnitBase<Player>
         var obj = projectile.GetComponent<Projectile>();
 
         // fires out of mouth
-        var positionOffset = GetPosition() + new Vector2(1, 1);
+        var isOffset = gameObject.GetComponentInChildren<GoobusFloater>().dir;
+        var offset = 1;
+        if (isOffset)
+        {
+            offset = 2;
+        }
+        var positionOffset = GetPosition() + new Vector2(1, offset);
 
         var direction = new Vector2();
         var rotation = 0f;

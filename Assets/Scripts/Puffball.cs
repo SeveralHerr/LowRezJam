@@ -2,46 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Puffball : MonoBehaviour, ISkill
+public class Puffball : MonoBehaviour
 {
-    public GameObject puffballPrefab;
+    public GameObject prefab;
 
-    private float nextWaveSpawnTimer;
-    public float waveTimer = 10f;
+    public MovementBehavior MovementBehavior;
+
+    private Vector2 Direction { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        nextWaveSpawnTimer = 3f;
 
-        puffballPrefab = Resources.Load("Prefabs/Puffball") as GameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        nextWaveSpawnTimer -= Time.deltaTime;
-        if (nextWaveSpawnTimer <= 0f)
+        if (Direction == null)
         {
-            SpawnProjectiles();
-            nextWaveSpawnTimer = waveTimer;
+            return;
+        }
+
+        MovementBehavior.MoveTowards(Direction);
+
+        PurgeWhenOutOfBounds();
+    }
+
+    public void PurgeWhenOutOfBounds()
+    {
+        if (Map.Instance.IsOutOfBounds(MovementBehavior.GetPosition()))
+        {
+            Destroy(gameObject);
         }
     }
 
-
-    private void SpawnProjectiles()
+    public Puffball Create(Vector2 initialPosition, Vector2 direction, float speed)
     {
-        var obj = puffballPrefab.GetComponent<Projectile>();
-        var positionOffset = Player.Instance.Position + new Vector2(1, 1);
-
-        obj.Create(positionOffset, new Vector2(1, 0), Player.Instance.ProjectileAttackSpeed, 0);
-        obj.Create(positionOffset, new Vector2(-1, 0), Player.Instance.ProjectileAttackSpeed, 0);
-        obj.Create(positionOffset, new Vector2(0, 1), Player.Instance.ProjectileAttackSpeed, 90);
-        obj.Create(positionOffset, new Vector2(0, -1), Player.Instance.ProjectileAttackSpeed, 90);
+        var newObject = Instantiate(prefab, initialPosition, Quaternion.identity) as GameObject;
+        var obj = newObject.GetComponent<Puffball>();
+        obj.MovementBehavior.MovementSpeed = speed;
+        obj.SetDirection(direction);
+        return obj;
     }
 
-    public void LearnSkill()
+    public void SetDirection(Vector2 direction)
     {
-        Player.Instance.gameObject.AddComponent<Puffball>();
+        Direction = direction;
     }
 }
