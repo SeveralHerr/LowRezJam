@@ -1,39 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class RoseSpawner : MonoBehaviour, ISkill
+public class RoseSpawner : MonoBehaviour
 {
-    public GameObject rosePrefab;
+    private Rose.Factory roseFactory;
 
-    private float timer = 3f;
+    private ITimer Timer { get; set; }
 
-
-    // Start is called before the first frame update
-    void Start()
+    [Inject]
+    public void Construct(Rose.Factory factory, ITimer timer)
     {
-        rosePrefab = Resources.Load($"Prefabs/{nameof(Rose)}") as GameObject;
+        roseFactory = factory;
+        Timer = timer;
     }
 
-    // Update is called once per frame
+    public class Factory : PlaceholderFactory<string, RoseSpawner>
+    {
+        public RoseSpawner Create()
+        {
+            return base.Create($"Prefabs/{nameof(RoseSpawner)}");
+        }
+    }
+
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
-        {
-            SpawnRose();
-            timer = 3f;
-        }
+        Timer.RunTimer(3f, () => SpawnRose());
     }
 
     private void SpawnRose()
     {
-        var obj = rosePrefab.GetComponent<Rose>();
-        obj.Create();
+        var spawnY = UnityEngine.Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
+        var spawnX = UnityEngine.Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+
+        var spawnPosition = new Vector2(spawnX, spawnY);
+
+        var rosePrefab = roseFactory.Create();
+        rosePrefab.transform.position = spawnPosition;
     }
 
-    public void LearnSkill()
+    public void SetParent(GameObject obj)
     {
-        Player.Instance.gameObject.AddComponent<RoseSpawner>();
+        transform.SetParent(obj.transform);
     }
 }

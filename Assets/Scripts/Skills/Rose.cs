@@ -1,38 +1,35 @@
 using UnityEngine;
+using Zenject;
 
 public class Rose : MonoBehaviour
 {
-    public GameObject prefab;
-    public float lifetime = 2f;
+    public float duration = 2f;
+    private ITimer Timer { get; set; }
+    private ICollisionHandler CollisionHandler { get; set; }
 
-    public Rose Create()
+    [Inject]
+    private void Construct(ITimer timer, ICollisionHandler collisionHandler)
     {
-        var spawnY = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-        var spawnX = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+        Timer = timer;
+        CollisionHandler = collisionHandler;
+    }
 
-        var spawnPosition = new Vector2(spawnX, spawnY);
-
-        var newObject = Instantiate(prefab, spawnPosition, Quaternion.identity) as GameObject;
-        var obj = newObject.GetComponent<Rose>();
-        return obj;
+    public class Factory : PlaceholderFactory<string, Rose>
+    {
+        public Rose Create()
+        {
+            return base.Create($"Prefabs/{nameof(Rose)}");
+        }
     }
 
     private void Update()
-    {   
-        lifetime -= Time.deltaTime;
-        if (lifetime <= 0)
-        {
-            Destroy(gameObject);
-        }
+    {
+        Timer.RunOnceTimer(duration, () => Destroy(gameObject));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            Score.Instance.currentScore += 1;
-            Destroy(collision.gameObject);
-        }
+        CollisionHandler.DestroyOnCollisionWithAction(collision, "Enemy", () => Score.Instance.currentScore += 1);
     }
 }
 

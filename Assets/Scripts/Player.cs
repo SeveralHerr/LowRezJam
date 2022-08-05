@@ -13,7 +13,7 @@ public class Player : SingletonUnitBase<Player>
     public bool HasPiercing = false;
     public float ProjectileAttackSpeed = 1f;
 
-    public SkillGroup SkillGroup;
+   // public SkillGroup SkillGroup;
 
     public Vector2 GetPosition()
     {
@@ -22,7 +22,7 @@ public class Player : SingletonUnitBase<Player>
 
     public override void Start()
     {
-        SkillGroup = new SkillGroup();
+        //SkillGroup = new SkillGroup();
         base.Start();
     }
 

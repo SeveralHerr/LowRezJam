@@ -1,47 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class PuffballSpawner : MonoBehaviour, ISkill
+public class PuffballSpawner : MonoBehaviour
 {
-    public GameObject puffballPrefab;
+    private Puffball.Factory puffFactory;
+    private ITimer Timer { get; set; }
 
-    private float timer;
-    public float waveTimer = 10f;
-
-    // Start is called before the first frame update
-    void Start()
+    [Inject]
+    public void Construct(Puffball.Factory factory, ITimer timer)
     {
-        timer = 3f;
-
-        puffballPrefab = Resources.Load($"Prefabs/{nameof(Puffball)}") as GameObject;
+        puffFactory = factory;
+        Timer = timer;
     }
 
-    // Update is called once per frame
-    void Update()
+    public class Factory : PlaceholderFactory<string, PuffballSpawner>
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
+        public PuffballSpawner Create()
         {
-            SpawnProjectiles();
-            timer = waveTimer;
+            return base.Create($"Prefabs/{nameof(PuffballSpawner)}");
         }
     }
 
+    void Update()
+    {
+        Timer.RunTimer(3f, () => SpawnProjectiles());
+    }
+
+    public void SetParent(GameObject obj)
+    {
+        transform.SetParent(obj.transform);
+    }
 
     private void SpawnProjectiles()
     {
-        var obj = puffballPrefab.GetComponent<Puffball>();
+        var obj = puffFactory.Create();
         var positionOffset = Player.Instance.Position + new Vector2(1, 1);
 
-        obj.Create(positionOffset, new Vector2(1, 0), Player.Instance.ProjectileAttackSpeed / 2);
-        obj.Create(positionOffset, new Vector2(-1, 0), Player.Instance.ProjectileAttackSpeed / 2);
-        obj.Create(positionOffset, new Vector2(0, 1), Player.Instance.ProjectileAttackSpeed / 2);
-        obj.Create(positionOffset, new Vector2(0, -1), Player.Instance.ProjectileAttackSpeed / 2);
-    }
-
-    public void LearnSkill()
-    {
-        Player.Instance.gameObject.AddComponent<PuffballSpawner>();
+        obj.Setup(new Vector2(1, 0), Player.Instance.ProjectileAttackSpeed / 2, positionOffset);
+        obj.Setup(new Vector2(-1, 0), Player.Instance.ProjectileAttackSpeed / 2, positionOffset);
+        obj.Setup(new Vector2(0, 1), Player.Instance.ProjectileAttackSpeed / 2, positionOffset);
+        obj.Setup(new Vector2(0, -1), Player.Instance.ProjectileAttackSpeed / 2, positionOffset);
     }
 }
