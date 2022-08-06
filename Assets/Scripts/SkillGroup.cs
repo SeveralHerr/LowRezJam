@@ -94,12 +94,18 @@ public class SkillList
         };
     }
 
-    private IEnumerable<List<SkillGroup>> GetAvailableSkills()
+    private List<List<SkillGroup>> GetAvailableSkills()
     {
+        var skillList = new List<List<SkillGroup>>();
         foreach( var skill in Skills )
         {
-            yield return skill.Where(x => !x.IsComplete).ToList();
+            var s = skill.Where(x => !x.IsComplete).ToList();
+            if (s.Count != 0)
+            {
+                skillList.Add(skill);
+            }
         }
+        return skillList;
     }
 
     public List<Skill> GetThreeRandomSkills()
