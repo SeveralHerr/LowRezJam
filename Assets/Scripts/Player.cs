@@ -11,7 +11,7 @@ public class Player : SingletonUnitBase<Player>
     public Direction Direction;
 
     public bool HasPiercing = false;
-    public float ProjectileAttackSpeed = 1f;
+    public float ProjectileAttackSpeed = 0.5f;
 
    // public SkillGroup SkillGroup;
 

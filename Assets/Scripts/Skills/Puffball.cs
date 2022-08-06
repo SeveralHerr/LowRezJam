@@ -9,6 +9,12 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
     private Vector2 Direction { get; set; }
     private ICollisionHandler CollisionHandler { get; set; }
 
+    private Vector3 pos;
+    public Vector3 axis;
+    public float frequency = 3f;
+    public float amplitude = 14f;
+    public float cyclespeed = 15f;
+
     [Inject]
     private void Construct(ICollisionHandler collisionHandler)
     {
@@ -23,6 +29,28 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
         }
     }
 
+    private void Start()
+    {
+        transform.position = Player.Instance.Position;
+        pos = transform.position;
+        if(Direction.x == 1 && Direction.y == 0)
+        {
+            axis = transform.right;
+        }
+        else if (Direction.x == -1 && Direction.y == 0)
+        {
+            axis = -transform.right;
+        }
+        else if (Direction.x == 0 && Direction.y == -1)
+        {
+            axis = -transform.up;
+        }
+        else
+        {
+            axis = transform.up;
+        }
+    }
+
     void Update()
     {
         if (Direction == null)
@@ -30,7 +58,29 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
             return;
         }
 
-        MovementBehavior.MoveTowards(Direction);
+        // 3 14 15
+
+        if (Direction.x == 1 && Direction.y == 0)
+        {
+            pos += Vector3.down * Time.deltaTime * cyclespeed;
+        }
+        else if (Direction.x == -1 && Direction.y == 0)
+        {
+            pos += Vector3.up * Time.deltaTime * cyclespeed;
+        }
+        else if (Direction.x == 0 && Direction.y == -1)
+        {
+            pos += Vector3.left * Time.deltaTime * cyclespeed;
+        }
+        else
+        {
+            pos += Vector3.right * Time.deltaTime * cyclespeed;
+        }
+
+        transform.position = pos + axis * Mathf.Sin(Time.time * frequency) * amplitude;
+
+
+        //MovementBehavior.MoveTowards( zigzag); //Direction
 
         PurgeWhenOutOfBounds();
     }

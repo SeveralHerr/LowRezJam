@@ -29,15 +29,6 @@ public class MovementBehavior : MonoBehaviour
 
     public void MovePosition(Vector2 movement)
     {
-        rb.MovePosition(PixelPerfectClamp(rb.position, 1) + PixelPerfectClamp(movement, 1) * MovementSpeed);
-    }
-
-    private Vector2 PixelPerfectClamp(Vector2 moveVector, float pixelsPerUnit)
-    {
-        var vectorInPixels = new Vector2(
-            Mathf.RoundToInt(moveVector.x * pixelsPerUnit),
-            Mathf.RoundToInt(moveVector.y * pixelsPerUnit));
-
-        return vectorInPixels / pixelsPerUnit;
+        rb.MovePosition(rb.position + movement * MovementSpeed);
     }
 }

@@ -26,6 +26,11 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemies()
     {
         var spawnPosition = Player.Instance.Position;
+        if(Player.Instance == null)
+        {
+            return;
+        }
+
         for(var i = 0; i < 10; i++)
         {
             var randomPosition = spawnPosition + GetRandomDir() * UnityEngine.Random.Range(80f, 180f);
