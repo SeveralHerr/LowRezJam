@@ -8,9 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
-    <ProjectGuid>{F07B2441-D2DA-5640-096E-66639098B4AA}</ProjectGuid>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{25CBB433-B33C-022F-96AC-9985443643BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -57,6 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\StartScreen.cs" />
     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Skills\Puffball.cs" />
     <Compile Include="Assets\Scripts\Skills\RoseSpawner.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Skills\PlantRingSpawner.cs" />
     <Compile Include="Assets\Scripts\SkillGroup.cs" />
     <Compile Include="Assets\Scripts\Skills\PlantRing.cs" />
+    <Compile Include="Assets\Scripts\GameOver.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
@@ -90,8 +91,9 @@
     <Compile Include="Assets\Scripts\Skills\PuffballSkill.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\LevelUp.cs" />
-    <Compile Include="Assets\Scripts\StartScreen.cs" />
-    <Compile Include="Assets\Scripts\GameOver.cs" />
+    <Compile Include="Assets\Scripts\Skills\RootSpikes.cs" />
+    <Compile Include="Assets\Scripts\Skills\RootSpikesSpawner.cs" />
+    <Compile Include="Assets\Scripts\Skills\RootSpikesSkill.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

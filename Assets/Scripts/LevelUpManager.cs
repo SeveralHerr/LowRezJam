@@ -57,6 +57,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
             return;
         }
 
+        SkillList.CompleteSkill(skillOption.Skill);
         skillOption.Skill.LearnSkill();
         
         UIObject.SetActive(false);
@@ -77,9 +78,6 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
             scoreTenRunOnce = true;
 
             var skills = SkillList.GetThreeRandomSkills();
-            SkillList.CompleteSkill(skills.FirstOrDefault());
-
-            var test = SkillList.GetThreeRandomSkills();
 
             UIObject.SetActive(true);
 

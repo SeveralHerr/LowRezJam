@@ -21,6 +21,10 @@ public class GameInstaller : MonoInstaller
         Container.BindFactory<string, PlantRing, PlantRing.Factory>().FromFactory<PrefabResourceFactory<PlantRing>>();
         Container.Bind<PlantRingSkill>().AsSingle();
 
+        Container.BindFactory<string, RootSpikesSpawner, RootSpikesSpawner.Factory>().FromFactory<PrefabResourceFactory<RootSpikesSpawner>>();
+        Container.BindFactory<string, RootSpikes, RootSpikes.Factory>().FromFactory<PrefabResourceFactory<RootSpikes>>();
+        Container.Bind<RootSpikesSkill>().AsSingle();
+
         Container.Bind<SkillList>().AsSingle();
         Container.Bind<PiercingSkill>().AsSingle();
         Container.Bind<AttackSpeedSkill>().AsSingle();

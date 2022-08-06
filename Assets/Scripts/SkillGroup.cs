@@ -14,23 +14,25 @@ public class SkillGroup
 }
 public class SkillList
 {
-    public RoseSkill RoseSkill;
-    public PuffballSkill PuffSkill;
-    public PlantRingSkill PlantRingSkill;
-    public AttackSpeedSkill AttackSpeedSkill;
-    public PiercingSkill PiercingSkill;
+    private RoseSkill RoseSkill;
+    private PuffballSkill PuffSkill;
+    private PlantRingSkill PlantRingSkill;
+    private AttackSpeedSkill AttackSpeedSkill;
+    private PiercingSkill PiercingSkill;
+    private RootSpikesSkill RootSpikesSkill;
 
-    public List<List<SkillGroup>> Skills;
+    private List<List<SkillGroup>> Skills;
 
     [Inject]
     public void Construct(RoseSkill skill, PuffballSkill puffSkill, PlantRingSkill plantRingSkill,
-        AttackSpeedSkill attackSpeedSkill, PiercingSkill piercingSkill)
+        AttackSpeedSkill attackSpeedSkill, PiercingSkill piercingSkill, RootSpikesSkill rootSpikesSkill)
     {
         RoseSkill = skill;
         PuffSkill = puffSkill;
         PlantRingSkill = plantRingSkill;
         AttackSpeedSkill = attackSpeedSkill;
         PiercingSkill = piercingSkill;
+        RootSpikesSkill = rootSpikesSkill;
 
         Skills = GetSkillGroups();
     }
@@ -84,13 +86,22 @@ public class SkillList
             }
         };
 
+        var rootSpikesSkill = new List<SkillGroup>
+        {
+            new SkillGroup
+            {
+                Skill = RootSpikesSkill
+            }
+        };
+
         return new List<List<SkillGroup>> 
         { 
             attackSpeedSkill.OrderBy(x => x.Order).ToList(), 
             plantRingSkill.OrderBy(x => x.Order).ToList(), 
             puffballSkill.OrderBy(x => x.Order).ToList(), 
             roseSkill.OrderBy(x => x.Order).ToList(), 
-            piercingSkill.OrderBy(x => x.Order).ToList()
+            piercingSkill.OrderBy(x => x.Order).ToList(),
+            rootSpikesSkill.OrderBy(x => x.Order).ToList()
         };
     }
 
@@ -122,7 +133,7 @@ public class SkillList
                 continue;
             }
 
-            var randomId = UnityEngine.Random.Range(0, skills.Count()-1);
+            var randomId = UnityEngine.Random.Range(0, skills.Count());
             var randomSkill = skills[randomId].FirstOrDefault();
 
             skills.RemoveAt(randomId);
