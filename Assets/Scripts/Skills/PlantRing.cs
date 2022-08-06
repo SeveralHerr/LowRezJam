@@ -1,34 +1,36 @@
 using UnityEngine;
+using Zenject;
 
-public class PlantRing : MonoBehaviour 
+public class PlantRing : MonoBehaviour, IHasSkillFactory
 {
-    public GameObject prefab;
-    public float lifetime = .5f;
+    private ITimer Timer { get; set; }
 
-    public PlantRing Create(Vector2 initialPosition)
+    private ICollisionHandler CollisionHandler { get; set; }
+
+    [Inject]
+    public void Construct(ITimer timer, ICollisionHandler collisionHandler)
     {
-        var newObject = Instantiate(prefab, initialPosition, Quaternion.identity) as GameObject;
-        var obj = newObject.GetComponent<PlantRing>();
-        return obj;
+        Timer = timer;
+        CollisionHandler = collisionHandler;
     }
 
+    public class Factory : PlaceholderFactory<string, PlantRing>
+    {
+        public PlantRing Create()
+        {
+            return base.Create($"Prefabs/{nameof(PlantRing)}");
+        }
+    }
     private void Update()
     {
         transform.position = Player.Instance.Position;
-        lifetime -= Time.deltaTime;
-        if(lifetime <= 0)
-        {
-            Destroy(gameObject);
-        }
+
+        Timer.RunOnceTimer(.5f, () => Destroy(gameObject));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            Score.Instance.currentScore += 1;
-            Destroy(collision.gameObject);
-        }
+        CollisionHandler.DestroyOnCollisionWithAction(collision, "Enemy", () => Score.Instance.currentScore += 1);
     }
 }
 

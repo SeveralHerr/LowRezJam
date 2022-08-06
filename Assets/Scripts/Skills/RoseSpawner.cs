@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class RoseSpawner : MonoBehaviour
+public class RoseSpawner : MonoBehaviour, IHasSkillFactory
 {
     private Rose.Factory roseFactory;
 

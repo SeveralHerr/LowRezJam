@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class Rose : MonoBehaviour
+public class Rose : MonoBehaviour, IHasSkillFactory
 {
     public float duration = 2f;
     private ITimer Timer { get; set; }

@@ -1,9 +1,11 @@
 using UnityEngine;
 public interface ISkill
 {
-    public void LearnSkill();
-
 }
+
+public interface IHasSkillFactory { };
+
+public interface ISpawner { };
 
 public interface INewSkill
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PuffballSpawner : MonoBehaviour
+public class PuffballSpawner : MonoBehaviour, IHasSkillFactory
 {
     private Puffball.Factory puffFactory;
     private ITimer Timer { get; set; }
@@ -35,12 +35,15 @@ public class PuffballSpawner : MonoBehaviour
 
     private void SpawnProjectiles()
     {
-        var obj = puffFactory.Create();
-        var positionOffset = Player.Instance.Position + new Vector2(1, 1);
+        SpawnProjectile(new Vector2(1, 0));
+        SpawnProjectile(new Vector2(-1, 0));
+        SpawnProjectile(new Vector2(0, 1));
+        SpawnProjectile(new Vector2(0, -1));
+    }
 
-        obj.Setup(new Vector2(1, 0), Player.Instance.ProjectileAttackSpeed / 2, positionOffset);
-        obj.Setup(new Vector2(-1, 0), Player.Instance.ProjectileAttackSpeed / 2, positionOffset);
-        obj.Setup(new Vector2(0, 1), Player.Instance.ProjectileAttackSpeed / 2, positionOffset);
-        obj.Setup(new Vector2(0, -1), Player.Instance.ProjectileAttackSpeed / 2, positionOffset);
+    private void SpawnProjectile(Vector2 direction)
+    {
+        var obj = puffFactory.Create();
+        obj.Setup(direction, Player.Instance.ProjectileAttackSpeed / 2, Player.Instance.Position);
     }
 }

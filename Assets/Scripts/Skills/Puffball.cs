@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Puffball : MonoBehaviour
+public class Puffball : MonoBehaviour, IHasSkillFactory
 {
     public MovementBehavior MovementBehavior;
     private Vector2 Direction { get; set; }

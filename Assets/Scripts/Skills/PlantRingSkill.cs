@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Zenject;
 
-public class PlantRingSkill : MonoBehaviour
+public class PlantRingSkill : Skill, ISkill
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override string ShortName => "+Ring";
 
-    // Update is called once per frame
-    void Update()
+    public PlantRingSpawner.Factory plantRingFactory;
+
+    [Inject]
+    public void Construct(PlantRingSpawner.Factory factory)
     {
-        
+        plantRingFactory = factory;
+    }
+    public override void LearnSkill()
+    {
+        var prefab = plantRingFactory.Create();
+        prefab.SetParent(Player.Instance.gameObject);
     }
 }

@@ -27,16 +27,13 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
     public bool scoreTenRunOnce = false;
     public bool scoreTwentyRunOnce = false;
 
-    public RoseSkill RoseSkill;
-    public PuffballSkill PuffSkill;
+    public SkillList SkillList;
 
     void Start()
     {
         UIObject.SetActive(false);
 
-        option1.Button.onClick.AddListener(Button_Click1);
-        option2.Button.onClick.AddListener(Button_Click2);
-        option3.Button.onClick.AddListener(Button_Click3);
+
     }
     private void Button_Click1( )
     {
@@ -54,15 +51,21 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
     private void OnClick(SkillOption skillOption)
     {
         Time.timeScale = 1;
+        if(skillOption.Skill == null)
+        {
+            UIObject.SetActive(false);
+            return;
+        }
+
         skillOption.Skill.LearnSkill();
+        
         UIObject.SetActive(false);
     }
 
     [Inject]
-    public void Construct(RoseSkill skill, PuffballSkill puffSkill)
+    public void Construct(SkillList skillList)
     {
-        RoseSkill = skill;
-        PuffSkill = puffSkill;
+        SkillList = skillList;
     }
 
     // Update is called once per frame
@@ -73,16 +76,24 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
             Time.timeScale = 0;
             scoreTenRunOnce = true;
 
+            var skills = SkillList.GetThreeRandomSkills();
+            SkillList.CompleteSkill(skills.FirstOrDefault());
+
+            var test = SkillList.GetThreeRandomSkills();
+
             UIObject.SetActive(true);
 
-            option1.Skill = RoseSkill;
-            option2.Skill = PuffSkill;
-            option3.Skill = PuffSkill;
+            option1.Skill = skills[0] ?? null;
+            option2.Skill = skills[1] ?? null;
+            option3.Skill = skills[2] ?? null;
 
+            option1.TextBox.text = option1.Skill?.ShortName ?? string.Empty;
+            option2.TextBox.text = option2.Skill?.ShortName ?? string.Empty;
+            option3.TextBox.text = option3.Skill?.ShortName ?? string.Empty;
 
-            option1.TextBox.text = option1.Skill.ShortName;
-            option2.TextBox.text = option2.Skill.ShortName;
-            option3.TextBox.text = option3.Skill.ShortName;
+            option1.Button.onClick.AddListener(Button_Click1);
+            option2.Button.onClick.AddListener(Button_Click2);
+            option3.Button.onClick.AddListener(Button_Click3);
         }
         //if (Score.Instance.currentScore == 3 && scoreTenRunOnce == false)
         //{

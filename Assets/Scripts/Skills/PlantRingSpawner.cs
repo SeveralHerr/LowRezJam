@@ -1,39 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class PlantRingSpawner : MonoBehaviour, ISkill
+public class PlantRingSpawner : MonoBehaviour, IHasSkillFactory
 {
-    public GameObject plantRingPrefab;
+    private PlantRing.Factory PlantRingFactory { get; set; }
+    private ITimer Timer { get; set; }
 
-    private float timer = 5f;
-
-
-    // Start is called before the first frame update
-    void Start()
+    [Inject]
+    public void Construct(PlantRing.Factory factory, ITimer timer)
     {
-        plantRingPrefab = Resources.Load($"Prefabs/{nameof(PlantRing)}") as GameObject;
+        PlantRingFactory = factory;
+        Timer = timer;
     }
 
-    // Update is called once per frame
+    public class Factory : PlaceholderFactory<string, PlantRingSpawner>
+    {
+        public PlantRingSpawner Create()
+        {
+            return base.Create($"Prefabs/{nameof(PlantRingSpawner)}");
+        }
+    }
+
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
-        {
-            SpawnRing();
-            timer = 5f;
-        }
+        Timer.RunTimer(5f, () => SpawnRing());
     }
 
     private void SpawnRing()
     {
-        var obj = plantRingPrefab.GetComponent<PlantRing>();
-        obj.Create(Player.Instance.Position);
+        PlantRingFactory.Create();
     }
 
-    public void LearnSkill()
+    public void SetParent(GameObject obj)
     {
-        Player.Instance.gameObject.AddComponent<PlantRingSpawner>();
+        transform.SetParent(obj.transform);
     }
 }
