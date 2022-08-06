@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour
             return;
         }
 
+
         MovementBehavior.MoveTowards(Direction);
 
         PurgeWhenOutOfBounds();
@@ -56,7 +57,8 @@ public class Projectile : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             Score.Instance.currentScore += 1;
-            Destroy(collision.gameObject);
+
+            collision.gameObject.GetComponent<Enemy>().Dead();
 
             if(!Player.Instance.HasPiercing)
             {

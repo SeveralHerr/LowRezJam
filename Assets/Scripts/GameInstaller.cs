@@ -25,6 +25,8 @@ public class GameInstaller : MonoInstaller
         Container.Bind<PiercingSkill>().AsSingle();
         Container.Bind<AttackSpeedSkill>().AsSingle();
 
+        Container.BindFactory<string, Enemy, Enemy.Factory>().FromFactory<PrefabResourceFactory<Enemy>>();
+
 
         Container.Bind<ITimer>().To<Timer>().AsTransient();
         Container.Bind<ICollisionHandler>().To<CollisionHandler>().AsSingle();

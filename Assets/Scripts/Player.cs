@@ -145,7 +145,11 @@ public class Player : SingletonUnitBase<Player>
         obj.Create(positionOffset, direction, ProjectileAttackSpeed, rotation);
     }
 
- 
+    public void Dead()
+    {
+        DisplayGameOverScreen();
+    }
+
     private void DisplayGameOverScreen()
     {
         gameOverPrefab.SetActive(true);
@@ -153,23 +157,16 @@ public class Player : SingletonUnitBase<Player>
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if (collision.CompareTag("Enemy"))
-        {
+        //if (collision.CompareTag("Enemy"))
+        //{
 
-            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (var item in enemies)
-            {
-                Destroy(item.gameObject);
-            }
+        //    var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //    foreach (var item in enemies)
+        //    {
+        //        Destroy(item.gameObject);
+        //    }
 
-
-            var player = GameObject.FindGameObjectsWithTag("Player");
-            foreach (var item in player)
-            {
-                Destroy(item.gameObject);
-            }
-
-            DisplayGameOverScreen();
-        }
+            
+        //}
     }
 }

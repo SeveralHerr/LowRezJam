@@ -109,10 +109,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
-        height: 9
+        width: 11
+        height: 16
       alignment: 9
-      pivot: {x: 0.4877778, y: 0.44246915}
+      pivot: {x: 0.4636326, y: 0.24997404}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -128,10 +128,10 @@ TextureImporter:
       name: Slime_1
       rect:
         serializedVersion: 2
-        x: 8
+        x: 11
         y: 0
-        width: 8
-        height: 9
+        width: 11
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,6 +141,69 @@ TextureImporter:
       bones: []
       spriteID: 0688e9d9c2e30314abba46679e32cce5
       internalID: 530308679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slime_2
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 0
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fa27ef71d153084589726c60a659060
+      internalID: -1842099263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slime_3
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23b464ba614002b43a5ef6241cf2d7fb
+      internalID: 223770946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slime_4
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 0
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f604265c35a8ae4eb743642e01a6bed
+      internalID: -1979017292
       vertices: []
       indices: 
       edges: []
@@ -157,7 +220,10 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Slime_0: 1714135757
+      Slime_3: 223770946
       Slime_1: 530308679
+      Slime_2: -1842099263
+      Slime_4: -1979017292
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

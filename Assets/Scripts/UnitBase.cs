@@ -32,6 +32,11 @@ public class UnitBase : MonoBehaviour
         MovementBehavior.MoveTowards(position);
     }
 
+    public void StopMovement()
+    {
+        MovementBehavior.MovementSpeed = 0;
+    }
+
 
     public void MoveTowardsTarget(Vector2 source, Vector2 target)
     {

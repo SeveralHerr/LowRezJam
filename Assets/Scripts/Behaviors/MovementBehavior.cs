@@ -14,7 +14,7 @@ public class MovementBehavior : MonoBehaviour
     public void MoveTowards(Vector2 position)
     {
         var move = new Vector2(position.x * MovementSpeed * Time.fixedDeltaTime, position.y * MovementSpeed * Time.fixedDeltaTime);
-        rb.MovePosition(PixelPerfectClamp(rb.position, 8) + PixelPerfectClamp(move, 8));
+        rb.MovePosition(rb.position + move);
     }
 
     public Vector2 GetPosition()
