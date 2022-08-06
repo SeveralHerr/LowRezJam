@@ -14,7 +14,7 @@ public class MovementBehavior : MonoBehaviour
     public void MoveTowards(Vector2 position)
     {
         var move = new Vector2(position.x * MovementSpeed * Time.fixedDeltaTime, position.y * MovementSpeed * Time.fixedDeltaTime);
-        rb.MovePosition(rb.position + move);
+        rb.MovePosition(PixelPerfectClamp(rb.position, 8) + PixelPerfectClamp(move, 8));
     }
 
     public Vector2 GetPosition()
@@ -29,6 +29,15 @@ public class MovementBehavior : MonoBehaviour
 
     public void MovePosition(Vector2 movement)
     {
-        rb.MovePosition(rb.position + movement * MovementSpeed);
+        rb.MovePosition(PixelPerfectClamp(rb.position, 1) + PixelPerfectClamp(movement, 1) * MovementSpeed);
+    }
+
+    private Vector2 PixelPerfectClamp(Vector2 moveVector, float pixelsPerUnit)
+    {
+        var vectorInPixels = new Vector2(
+            Mathf.RoundToInt(moveVector.x * pixelsPerUnit),
+            Mathf.RoundToInt(moveVector.y * pixelsPerUnit));
+
+        return vectorInPixels / pixelsPerUnit;
     }
 }
