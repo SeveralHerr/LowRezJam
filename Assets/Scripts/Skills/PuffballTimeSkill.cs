@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PuffZigZagSkill : Skill
+public class PuffballTimeSkill : Skill
 {
-    public override string ShortName => "Puff+";
+    public override string ShortName => "Puff+++";
     private PuffballSkill PuffballSkill { get; set; }
 
     [Inject]
@@ -15,6 +15,6 @@ public class PuffZigZagSkill : Skill
     }
     public override void LearnSkill()
     {
-        PuffballSkill.IsZigZagEnabled = true;
+        PuffballSkill.TimeInterval /= 2;
     }
 }

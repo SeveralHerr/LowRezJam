@@ -22,13 +22,14 @@ public class SkillList
     private RootSpikesSkill RootSpikesSkill;
     private PuffZigZagSkill PuffZigZagSkill;
     private PuffPiercingSkill PuffPiercingSkill;
+    private PuffballTimeSkill PuffballTimeSkill;
 
     private List<List<SkillGroup>> Skills;
 
     [Inject]
     public void Construct(RoseSkill skill, PuffballSkill puffSkill, PlantRingSkill plantRingSkill,
         AttackSpeedSkill attackSpeedSkill, PiercingSkill piercingSkill, RootSpikesSkill rootSpikesSkill,
-        PuffZigZagSkill puffZigZagSkill, PuffPiercingSkill puffPiercingSkill)
+        PuffZigZagSkill puffZigZagSkill, PuffPiercingSkill puffPiercingSkill, PuffballTimeSkill puffballTimeSkill)
     {
         RoseSkill = skill;
         PuffSkill = puffSkill;
@@ -38,6 +39,7 @@ public class SkillList
         RootSpikesSkill = rootSpikesSkill;
         PuffZigZagSkill = puffZigZagSkill;
         PuffPiercingSkill= puffPiercingSkill;
+        PuffballTimeSkill = puffballTimeSkill;
 
         Skills = GetSkillGroups();
     }
@@ -91,7 +93,17 @@ public class SkillList
             {
                 Skill = PuffPiercingSkill,
                 Order = 2
-            }
+            },
+            new SkillGroup
+            {
+                Skill = PuffballTimeSkill,
+                Order = 3
+            },
+            new SkillGroup
+            {
+                Skill = PuffballTimeSkill,
+                Order = 4
+            },
         };
 
         var piercingSkill = new List<SkillGroup>
@@ -164,10 +176,11 @@ public class SkillList
     {
         foreach(var item in Skills)
         {
-            var skillToComplete = item.FirstOrDefault();
+            var skillToComplete = item.OrderBy(x => x.Order).FirstOrDefault(x => !x.IsComplete);
             if (skillToComplete.Skill == skill)
             {
                 skillToComplete.IsComplete = true;
+                return;
             }
         }
     }

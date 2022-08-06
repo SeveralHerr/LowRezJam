@@ -1468,7 +1468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1388939564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,6 +1924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIObject: {fileID: 1533747072}
+  PreviousScores: 
   option1:
     Button: {fileID: 1552636495}
     TextBox: {fileID: 1533747071}

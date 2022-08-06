@@ -8,9 +8,6 @@ public class PuffballSpawner : MonoBehaviour, IHasSkillFactory
     private Puffball.Factory puffFactory;
     private ITimer Timer { get; set; }
 
-    public bool HasZigZag = false;
-    public bool HasPuffPiercingSkill = false;
-
     [Inject]
     public void Construct(Puffball.Factory factory, ITimer timer)
     {
@@ -60,8 +57,6 @@ public class PuffballSpawner : MonoBehaviour, IHasSkillFactory
     private void SpawnProjectile(Vector2 direction)
     {
         var obj = puffFactory.Create();
-        obj.HasZigZagSkill = HasZigZag;
-        obj.HasPuffPiercingSkill = HasPuffPiercingSkill;
         obj.Setup(direction, Player.Instance.ProjectileAttackSpeed / 2, Player.Instance.Position);
     }
 }

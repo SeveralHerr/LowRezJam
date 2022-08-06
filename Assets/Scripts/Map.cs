@@ -5,10 +5,10 @@ using UnityEngine;
 public class Map : SingletonMonobehavior<Map>
 {
     // Need to figure out how to find these dynamically
-    private int MaxX = 80;
-    private int MinX = -154;
-    private int MinY = -52;
-    private int MaxY = 62;
+    private int MaxX = 280;
+    private int MinX = -354;
+    private int MinY = -252;
+    private int MaxY = 262;
 
     public bool IsOutOfBounds(Vector2 position)
     {
