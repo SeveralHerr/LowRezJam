@@ -2,37 +2,46 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemy;
-    private float nextWaveSpawnTimer;
+    private Enemy.Factory slimeFactory;
 
-    // Start is called before the first frame update
+    private ITimer Timer { get; set; }
+
+    [Inject]
+    public void Construct(ITimer timer, Enemy.Factory factory)
+    {
+        slimeFactory = factory;
+        Timer = timer;
+    }
+
     void Start()
     {
-        nextWaveSpawnTimer = 3f;
+        Timer.RunOnceTimer(3f, () => SpawnEnemies());
     }
 
     private void SpawnEnemies()
     {
         var spawnPosition = Player.Instance.Position;
+        if(Player.Instance == null)
+        {
+            return;
+        }
+
         for(var i = 0; i < 10; i++)
         {
             var randomPosition = spawnPosition + GetRandomDir() * UnityEngine.Random.Range(80f, 180f);
-            Instantiate(enemy, randomPosition, Quaternion.identity);
+            var slime = slimeFactory.Create();
+            slime.Position = randomPosition;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        nextWaveSpawnTimer -= Time.deltaTime;
-        if(nextWaveSpawnTimer <= 0f)
-        {
-            SpawnEnemies();
-            nextWaveSpawnTimer = 10f;
-        }
+        Timer.RunTimer(10f, () => SpawnEnemies());
     }
 
     public static Vector2 GetRandomDir()

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{9D055EED-8144-F2CF-2B3C-C247D41A0F5A}</ProjectGuid>
+    <ProjectGuid>{B7903FA0-40D3-BBB8-9CCF-148B13B6FBCE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Zenject-TestFramework</AssemblyName>
@@ -56,10 +56,10 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Zenject\OptionalExtras\TestFramework\SceneTestFixtureSceneReference.cs" />
-    <Compile Include="Assets\Plugins\Zenject\OptionalExtras\TestFramework\SceneTestFixture.cs" />
     <Compile Include="Assets\Plugins\Zenject\OptionalExtras\TestFramework\ZenjectUnitTestFixture.cs" />
     <Compile Include="Assets\Plugins\Zenject\OptionalExtras\TestFramework\ZenjectIntegrationTestFixture.cs" />
+    <Compile Include="Assets\Plugins\Zenject\OptionalExtras\TestFramework\SceneTestFixtureSceneReference.cs" />
+    <Compile Include="Assets\Plugins\Zenject\OptionalExtras\TestFramework\SceneTestFixture.cs" />
     <Compile Include="Assets\Plugins\Zenject\OptionalExtras\TestFramework\ZenjectTestUtil.cs" />
     <Compile Include="Assets\Plugins\Zenject\OptionalExtras\TestFramework\ValidateOnlyAttribute.cs" />
   </ItemGroup>
@@ -703,19 +703,17 @@
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Zenject.csproj">
-      <Project>{513EEE27-546F-0DBD-0DCA-0BC3A7688BF2}</Project>
+      <Project>{5DD50020-32B9-6A44-BC5B-34D3138E8A71}</Project>
       <Name>Zenject</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{3B0B2301-21B3-FCED-0977-9CE8C2D46ABD}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{A29A9D6D-89EB-9547-1B4E-A8E790E6175D}</Project>
-      <Name>UnityEngine.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

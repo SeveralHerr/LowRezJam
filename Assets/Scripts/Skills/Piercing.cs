@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Piercing : MonoBehaviour, ISkill
+public class PiercingSkill : Skill
 {
-    public void LearnSkill()
-    {
-        Player.Instance.HasPiercing = true;
-    }
-}
+    public override string ShortName => "Piercing";
 
-public class PiercingSkill :  ISkill
-{
-    public void LearnSkill()
+    public override void LearnSkill()
     {
         Player.Instance.HasPiercing = true;
     }

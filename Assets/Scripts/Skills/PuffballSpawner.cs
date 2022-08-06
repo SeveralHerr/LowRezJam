@@ -1,47 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class PuffballSpawner : MonoBehaviour, ISkill
+public class PuffballSpawner : MonoBehaviour, IHasSkillFactory
 {
-    public GameObject puffballPrefab;
+    private Puffball.Factory puffFactory;
+    private ITimer Timer { get; set; }
 
-    private float timer;
-    public float waveTimer = 10f;
+    public bool HasZigZag = false;
+    public bool HasPuffPiercingSkill = false;
 
-    // Start is called before the first frame update
-    void Start()
+    [Inject]
+    public void Construct(Puffball.Factory factory, ITimer timer)
     {
-        timer = 3f;
-
-        puffballPrefab = Resources.Load($"Prefabs/{nameof(Puffball)}") as GameObject;
+        puffFactory = factory;
+        Timer = timer;
     }
 
-    // Update is called once per frame
-    void Update()
+    public class Factory : PlaceholderFactory<string, PuffballSpawner>
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
+        public PuffballSpawner Create()
         {
-            SpawnProjectiles();
-            timer = waveTimer;
+            return base.Create($"Prefabs/{nameof(PuffballSpawner)}");
         }
     }
 
+    void Update()
+    {
+        Timer.RunTimer(3f, () => SpawnProjectiles());
+    }
+
+    public void SetParent(GameObject obj)
+    {
+        transform.SetParent(obj.transform);
+    }
 
     private void SpawnProjectiles()
     {
-        var obj = puffballPrefab.GetComponent<Puffball>();
-        var positionOffset = Player.Instance.Position + new Vector2(1, 1);
-
-        obj.Create(positionOffset, new Vector2(1, 0), Player.Instance.ProjectileAttackSpeed / 2);
-        obj.Create(positionOffset, new Vector2(-1, 0), Player.Instance.ProjectileAttackSpeed / 2);
-        obj.Create(positionOffset, new Vector2(0, 1), Player.Instance.ProjectileAttackSpeed / 2);
-        obj.Create(positionOffset, new Vector2(0, -1), Player.Instance.ProjectileAttackSpeed / 2);
+        var random = Random.Range(0, 4);
+        if (random == 0)
+        {
+            SpawnProjectile(new Vector2(1, 0));
+        }
+        else if (random == 1)
+        {
+            SpawnProjectile(new Vector2(-1, 0));
+        }
+        else if (random == 2)
+        {
+            SpawnProjectile(new Vector2(0, 1));
+        }
+        else if (random == 3)
+        {
+            SpawnProjectile(new Vector2(0, -1));
+        }
     }
 
-    public void LearnSkill()
+    private void SpawnProjectile(Vector2 direction)
     {
-        Player.Instance.gameObject.AddComponent<PuffballSpawner>();
+        var obj = puffFactory.Create();
+        obj.HasZigZagSkill = HasZigZag;
+        obj.HasPuffPiercingSkill = HasPuffPiercingSkill;
+        obj.Setup(direction, Player.Instance.ProjectileAttackSpeed / 2, Player.Instance.Position);
     }
 }
