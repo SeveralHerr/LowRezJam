@@ -2,7 +2,7 @@ using Zenject;
 
 public class PuffballSkill : Skill, ISkill
 {
-    public override string ShortName => "+Puff";
+    public override string ShortName => "Puff";
 
     public PuffballSpawner.Factory puffballSpawnerFactory;
 

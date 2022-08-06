@@ -2,7 +2,7 @@ using Zenject;
 
 public class PlantRingSkill : Skill, ISkill
 {
-    public override string ShortName => "+Ring";
+    public override string ShortName => "Ring";
 
     public PlantRingSpawner.Factory plantRingFactory;
 

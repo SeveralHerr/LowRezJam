@@ -28,6 +28,8 @@ public class GameInstaller : MonoInstaller
         Container.Bind<SkillList>().AsSingle();
         Container.Bind<PiercingSkill>().AsSingle();
         Container.Bind<AttackSpeedSkill>().AsSingle();
+        Container.Bind<PuffZigZagSkill>().AsSingle();
+        Container.Bind<PuffPiercingSkill>().AsSingle();
 
         Container.BindFactory<string, Enemy, Enemy.Factory>().FromFactory<PrefabResourceFactory<Enemy>>();
 

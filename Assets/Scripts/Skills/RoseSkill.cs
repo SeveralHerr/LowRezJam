@@ -2,7 +2,7 @@ using Zenject;
 
 public class RoseSkill : Skill, ISkill
 {
-    public override string ShortName => "+Rose";
+    public override string ShortName => "Rose";
 
     public RoseSpawner.Factory roseSpawnerFactory;
 

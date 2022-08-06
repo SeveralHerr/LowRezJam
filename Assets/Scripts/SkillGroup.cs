@@ -20,12 +20,15 @@ public class SkillList
     private AttackSpeedSkill AttackSpeedSkill;
     private PiercingSkill PiercingSkill;
     private RootSpikesSkill RootSpikesSkill;
+    private PuffZigZagSkill PuffZigZagSkill;
+    private PuffPiercingSkill PuffPiercingSkill;
 
     private List<List<SkillGroup>> Skills;
 
     [Inject]
     public void Construct(RoseSkill skill, PuffballSkill puffSkill, PlantRingSkill plantRingSkill,
-        AttackSpeedSkill attackSpeedSkill, PiercingSkill piercingSkill, RootSpikesSkill rootSpikesSkill)
+        AttackSpeedSkill attackSpeedSkill, PiercingSkill piercingSkill, RootSpikesSkill rootSpikesSkill,
+        PuffZigZagSkill puffZigZagSkill, PuffPiercingSkill puffPiercingSkill)
     {
         RoseSkill = skill;
         PuffSkill = puffSkill;
@@ -33,6 +36,8 @@ public class SkillList
         AttackSpeedSkill = attackSpeedSkill;
         PiercingSkill = piercingSkill;
         RootSpikesSkill = rootSpikesSkill;
+        PuffZigZagSkill = puffZigZagSkill;
+        PuffPiercingSkill= puffPiercingSkill;
 
         Skills = GetSkillGroups();
     }
@@ -74,7 +79,18 @@ public class SkillList
         {
             new SkillGroup
             {
-                Skill = PuffSkill
+                Skill = PuffSkill, 
+                Order = 0
+            },
+            new SkillGroup 
+            {
+                Skill = PuffZigZagSkill,
+                Order = 1
+            },
+            new SkillGroup
+            {
+                Skill = PuffPiercingSkill,
+                Order = 2
             }
         };
 

@@ -14,6 +14,8 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
     public float frequency = 3f;
     public float amplitude = 14f;
     public float cyclespeed = 15f;
+    public bool HasZigZagSkill = false;
+    public bool HasPuffPiercingSkill = false;
 
     [Inject]
     private void Construct(ICollisionHandler collisionHandler)
@@ -60,27 +62,31 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
 
         // 3 14 15
 
-        if (Direction.x == 1 && Direction.y == 0)
+        if (HasZigZagSkill)
         {
-            pos += Vector3.down * Time.deltaTime * cyclespeed;
-        }
-        else if (Direction.x == -1 && Direction.y == 0)
-        {
-            pos += Vector3.up * Time.deltaTime * cyclespeed;
-        }
-        else if (Direction.x == 0 && Direction.y == -1)
-        {
-            pos += Vector3.left * Time.deltaTime * cyclespeed;
+            if (Direction.x == 1 && Direction.y == 0)
+            {
+                pos += Vector3.down * Time.deltaTime * cyclespeed;
+            }
+            else if (Direction.x == -1 && Direction.y == 0)
+            {
+                pos += Vector3.up * Time.deltaTime * cyclespeed;
+            }
+            else if (Direction.x == 0 && Direction.y == -1)
+            {
+                pos += Vector3.left * Time.deltaTime * cyclespeed;
+            }
+            else
+            {
+                pos += Vector3.right * Time.deltaTime * cyclespeed;
+            }
+
+            transform.position = pos + axis * Mathf.Sin(Time.time * frequency) * amplitude;
         }
         else
         {
-            pos += Vector3.right * Time.deltaTime * cyclespeed;
+            MovementBehavior.MoveTowards(Direction);
         }
-
-        transform.position = pos + axis * Mathf.Sin(Time.time * frequency) * amplitude;
-
-
-        //MovementBehavior.MoveTowards( zigzag); //Direction
 
         PurgeWhenOutOfBounds();
     }
@@ -103,5 +109,9 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CollisionHandler.DestroyOnCollisionWithAction(collision, "Enemy", () => Score.Instance.currentScore += 1);
+        if (!HasPuffPiercingSkill)
+        {
+            Destroy(gameObject);
+        }
     }
 }

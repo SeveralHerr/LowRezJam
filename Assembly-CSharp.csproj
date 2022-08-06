@@ -95,6 +95,8 @@
     <Compile Include="Assets\Scripts\Skills\RootSpikesSpawner.cs" />
     <Compile Include="Assets\Scripts\Skills\RootSpikes.cs" />
     <Compile Include="Assets\Scripts\Skills\RootSpikesSkill.cs" />
+    <Compile Include="Assets\Scripts\Skills\PuffZigZagSkill.cs" />
+    <Compile Include="Assets\Scripts\Skills\PuffPiercingSkill.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

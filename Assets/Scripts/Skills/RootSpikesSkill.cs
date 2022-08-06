@@ -2,7 +2,7 @@ using Zenject;
 
 public class RootSpikesSkill : Skill, ISkill
 {
-    public override string ShortName => "+Roots";
+    public override string ShortName => "Roots";
 
     public RootSpikesSpawner.Factory spikeRootsFactory;
 
