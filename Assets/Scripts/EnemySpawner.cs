@@ -8,6 +8,8 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemy;
     private Enemy.Factory slimeFactory;
+    public List<Transform> EnemySpawnPositions;
+    private int NextWaveCount = 10;
 
     private ITimer Timer { get; set; }
 
@@ -25,18 +27,19 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        var spawnPosition = Player.Instance.Position;
+        var spawnPosition = (Vector2)EnemySpawnPositions[UnityEngine.Random.Range(0, EnemySpawnPositions.Count)].position;
         if(Player.Instance == null)
         {
             return;
         }
 
-        for(var i = 0; i < 10; i++)
+        for(var i = 0; i < NextWaveCount; i++)
         {
-            var randomPosition = spawnPosition + GetRandomDir() * UnityEngine.Random.Range(80f, 180f);
             var slime = slimeFactory.Create();
-            slime.Position = randomPosition;
+            slime.Position = spawnPosition + GetRandomDir() * UnityEngine.Random.Range(0f, 10f);
         }
+
+        NextWaveCount += 5;
     }
 
     void Update()

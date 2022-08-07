@@ -19,6 +19,7 @@ public class SkillOption
 public class LevelUpManager : MonoBehaviour//, IInitializable
 {
     public GameObject UIObject;
+    public List<int> PreviousScores = new List<int> ();
 
     public SkillOption option1;
     public SkillOption option2;
@@ -72,10 +73,10 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
     // Update is called once per frame
     void Update()
     {
-        if (Score.Instance.currentScore % 10 == 0  && Time.timeScale != 0)
+        if (Score.Instance.currentScore % 10 == 0  && Score.Instance.currentScore != 0 && !PreviousScores.Any(x => x == Score.Instance.currentScore))
         {
+            PreviousScores.Add(Score.Instance.currentScore);
             Time.timeScale = 0;
-            scoreTenRunOnce = true;
 
             var skills = SkillList.GetThreeRandomSkills();
 

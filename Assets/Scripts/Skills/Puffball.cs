@@ -8,19 +8,19 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
     public MovementBehavior MovementBehavior;
     private Vector2 Direction { get; set; }
     private ICollisionHandler CollisionHandler { get; set; }
+    private PuffballSkill PuffballSkill { get; set; }
 
     private Vector3 pos;
     public Vector3 axis;
     public float frequency = 3f;
     public float amplitude = 14f;
     public float cyclespeed = 15f;
-    public bool HasZigZagSkill = false;
-    public bool HasPuffPiercingSkill = false;
 
     [Inject]
-    private void Construct(ICollisionHandler collisionHandler)
+    private void Construct(ICollisionHandler collisionHandler, PuffballSkill puffballSkill)
     {
         CollisionHandler = collisionHandler;
+        PuffballSkill = puffballSkill;
     }
 
     public class Factory : PlaceholderFactory<string, Puffball>
@@ -62,7 +62,7 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
 
         // 3 14 15
 
-        if (HasZigZagSkill)
+        if (PuffballSkill.IsZigZagEnabled)
         {
             if (Direction.x == 1 && Direction.y == 0)
             {
@@ -109,7 +109,7 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CollisionHandler.DestroyOnCollisionWithAction(collision, "Enemy", () => Score.Instance.currentScore += 1);
-        if (!HasPuffPiercingSkill)
+        if (!PuffballSkill.IsPiercingEnabled)
         {
             Destroy(gameObject);
         }
