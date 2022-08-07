@@ -9,6 +9,7 @@ public class PuffballSkill : Skill, ISkill
     public bool IsPiercingEnabled = false;
     public bool IsZigZagEnabled = false;
     public float TimeInterval = 6f;
+    public float Speed = 3f;
 
     [Inject]
     public void Construct(PuffballSpawner.Factory factory)

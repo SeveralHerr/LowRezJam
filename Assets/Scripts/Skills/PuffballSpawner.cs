@@ -6,13 +6,15 @@ using Zenject;
 public class PuffballSpawner : MonoBehaviour, IHasSkillFactory
 {
     private Puffball.Factory puffFactory;
+    private PuffballSkill PuffballSkill;
     private ITimer Timer { get; set; }
 
     [Inject]
-    public void Construct(Puffball.Factory factory, ITimer timer)
+    public void Construct(Puffball.Factory factory, ITimer timer, PuffballSkill puffballSkill)
     {
         puffFactory = factory;
         Timer = timer;
+        PuffballSkill = puffballSkill;
     }
 
     public class Factory : PlaceholderFactory<string, PuffballSpawner>
@@ -57,6 +59,6 @@ public class PuffballSpawner : MonoBehaviour, IHasSkillFactory
     private void SpawnProjectile(Vector2 direction)
     {
         var obj = puffFactory.Create();
-        obj.Setup(direction, Player.Instance.ProjectileAttackSpeed / 2, Player.Instance.Position);
+        obj.Setup(direction, PuffballSkill.Speed, Player.Instance.Position);
     }
 }
