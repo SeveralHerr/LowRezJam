@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using TMPro;
 
 [Serializable]
-public class SkillOption
+public class SkillOption : Component
 {
     public Button Button;
     public Skill Skill { get; set; }
@@ -30,19 +30,20 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
     public SkillList SkillList;
 
-    public Score score;
-
+    private List<SkillOption> _skillOptionList = new List<SkillOption> ();
 
     void Start()
     {
-        option1.Button.onClick.AddListener(Button_Click1);
-        option2.Button.onClick.AddListener(Button_Click2);
-        option3.Button.onClick.AddListener(Button_Click3);
-
-        score.LevelUpEvent.AddListener(LevelUp_Event);
-
+        //option1.Button.onClick.AddListener(Button_Click1);
+        //option2.Button.onClick.AddListener(Button_Click2);
+        //option3.Button.onClick.AddListener(Button_Click3);
         UIObject.SetActive(false);
     }
+    private void Button_Click()
+    {
+        OnClick(option1);
+    }
+
     private void Button_Click1( )
     {
         OnClick(option1);
@@ -77,42 +78,32 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
         SkillList = skillList;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Score.Instance.currentScore % 20 == 0  && Score.Instance.currentScore != 0 && !PreviousScores.Any(x => x == Score.Instance.currentScore))
-        //{
-        //    PreviousScores.Add(Score.Instance.currentScore);
-        //    Time.timeScale = 0;
-
-        //    var skills = SkillList.GetThreeRandomSkills();
-
-        //    UIObject.SetActive(true);
-
-        //    option1.Skill = skills[0] ?? null;
-        //    option2.Skill = skills[1] ?? null;
-        //    option3.Skill = skills[2] ?? null;
-
-        //    option1.TextBox.text = option1.Skill?.ShortName ?? string.Empty;
-        //    option2.TextBox.text = option2.Skill?.ShortName ?? string.Empty;
-        //    option3.TextBox.text = option3.Skill?.ShortName ?? string.Empty;
-        //}
-    }
-
     private void LevelUp_Event()
     {
         Time.timeScale = 0;
 
         var skills = SkillList.GetThreeRandomSkills();
 
+        foreach (var skill in skills)
+        {
+            var skillOption = new SkillOption
+            {
+                Skill = skill
+            };
+
+            _skillOptionList.Add(skillOption);
+        }
+
+        for (int i = 0; i < _skillOptionList.Count; i++)
+        {
+            UIObject.SetActive(true);
+            var button = Instantiate((GameObject)Resources.Load($"Prefabs/SkillButton")).GetComponent<Button>();
+            button.transform.SetParent(UIObject.transform);
+            button.name = $"skillButton{i}";
+            button.onClick.AddListener(() => OnClick(_skillOptionList[i]));
+            button.transform.position = new Vector2 { x = 0, y = 12.6f };
+        }
+
         UIObject.SetActive(true);
-
-        option1.Skill = skills[0] ?? null;
-        option2.Skill = skills[1] ?? null;
-        option3.Skill = skills[2] ?? null;
-
-        option1.TextBox.text = option1.Skill?.ShortName ?? string.Empty;
-        option2.TextBox.text = option2.Skill?.ShortName ?? string.Empty;
-        option3.TextBox.text = option3.Skill?.ShortName ?? string.Empty;
     }
 }
