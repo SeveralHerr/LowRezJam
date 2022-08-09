@@ -141,7 +141,7 @@ public class SkillList
             var s = skill.Where(x => !x.IsComplete).ToList();
             if (s.Count != 0)
             {
-                skillList.Add(skill);
+                skillList.Add(s);
             }
         }
         return skillList;
@@ -176,8 +176,10 @@ public class SkillList
     {
         foreach(var item in Skills)
         {
-            var skillToComplete = item.OrderBy(x => x.Order).FirstOrDefault(x => !x.IsComplete);
-            if (skillToComplete.Skill == skill)
+            var skillToComplete = item.OrderBy(x => x.Order)
+                .FirstOrDefault(x => !x.IsComplete 
+                    && x.Skill == skill);
+            if (skillToComplete != null)
             {
                 skillToComplete.IsComplete = true;
                 return;

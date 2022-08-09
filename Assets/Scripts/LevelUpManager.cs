@@ -32,9 +32,10 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
     void Start()
     {
+        option1.Button.onClick.AddListener(Button_Click1);
+        option2.Button.onClick.AddListener(Button_Click2);
+        option3.Button.onClick.AddListener(Button_Click3);
         UIObject.SetActive(false);
-
-
     }
     private void Button_Click1( )
     {
@@ -73,7 +74,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
     // Update is called once per frame
     void Update()
     {
-        if (Score.Instance.currentScore % 10 == 0  && Score.Instance.currentScore != 0 && !PreviousScores.Any(x => x == Score.Instance.currentScore))
+        if (Score.Instance.currentScore % 20 == 0  && Score.Instance.currentScore != 0 && !PreviousScores.Any(x => x == Score.Instance.currentScore))
         {
             PreviousScores.Add(Score.Instance.currentScore);
             Time.timeScale = 0;
@@ -90,9 +91,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
             option2.TextBox.text = option2.Skill?.ShortName ?? string.Empty;
             option3.TextBox.text = option3.Skill?.ShortName ?? string.Empty;
 
-            option1.Button.onClick.AddListener(Button_Click1);
-            option2.Button.onClick.AddListener(Button_Click2);
-            option3.Button.onClick.AddListener(Button_Click3);
+
         }
     }
 }

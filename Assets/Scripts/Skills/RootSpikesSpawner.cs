@@ -23,7 +23,7 @@ public class RootSpikesSpawner : MonoBehaviour
 
     void Update()
     {
-        Timer.RunTimer(5f, () => SpawnRing());
+        Timer.RunTimer(8f, () => SpawnRing());
     }
 
     private void SpawnRing()
