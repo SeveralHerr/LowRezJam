@@ -15,7 +15,7 @@ public class CollisionHandler : ICollisionHandler
     {
         if (collider.CompareTag(tag))
         {
-            Score.Instance.currentScore += 1;
+            Score.Instance.IncrementScore();
             UnityEngine.Object.Destroy(collider.gameObject);
         }
     }
