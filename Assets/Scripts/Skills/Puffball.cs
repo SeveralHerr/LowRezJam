@@ -109,7 +109,7 @@ public class Puffball : MonoBehaviour, IHasSkillFactory
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CollisionHandler.DestroyOnCollisionWithAction(collision, "Enemy", () => {
-            Score.Instance.currentScore += 1;
+            Score.Instance.IncrementScore();
             if (!PuffballSkill.IsPiercingEnabled)
             {
                 Destroy(gameObject);

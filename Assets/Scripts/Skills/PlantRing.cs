@@ -30,7 +30,7 @@ public class PlantRing : MonoBehaviour, IHasSkillFactory
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        CollisionHandler.DestroyOnCollisionWithAction(collision, "Enemy", () => Score.Instance.currentScore += 1);
+        CollisionHandler.DestroyOnCollisionWithAction(collision, "Enemy", () => Score.Instance.IncrementScore());
     }
 }
 

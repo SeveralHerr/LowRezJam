@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Score.Instance.currentScore += 1;
+            Score.Instance.IncrementScore();
 
             collision.gameObject.GetComponent<Enemy>().Dead();
 
