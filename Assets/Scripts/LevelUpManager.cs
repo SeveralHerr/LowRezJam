@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Zenject;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.Events;
 
 [Serializable]
 public class SkillOption : Component
@@ -30,31 +31,9 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
     public SkillList SkillList;
 
-    private List<SkillOption> _skillOptionList = new List<SkillOption> ();
-
     void Start()
     {
-        //option1.Button.onClick.AddListener(Button_Click1);
-        //option2.Button.onClick.AddListener(Button_Click2);
-        //option3.Button.onClick.AddListener(Button_Click3);
         UIObject.SetActive(false);
-    }
-    private void Button_Click()
-    {
-        OnClick(option1);
-    }
-
-    private void Button_Click1( )
-    {
-        OnClick(option1);
-    }
-    private void Button_Click2()
-    {
-        OnClick(option2);
-    }
-    private void Button_Click3()
-    {
-        OnClick(option3);
     }
 
     private void OnClick(SkillOption skillOption)
@@ -69,7 +48,14 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
         SkillList.CompleteSkill(skillOption.Skill);
         skillOption.Skill.LearnSkill();
         
+        var skillBtnList = GameObject.FindGameObjectsWithTag("Button1");
+
         UIObject.SetActive(false);
+
+        foreach (var skillButton in skillBtnList)
+        {
+            Destroy(skillButton);
+        }
     }
 
     [Inject]
@@ -84,6 +70,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
         var skills = SkillList.GetThreeRandomSkills();
 
+        var skillOptionList = new List<SkillOption>();
         foreach (var skill in skills)
         {
             var skillOption = new SkillOption
@@ -91,17 +78,24 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
                 Skill = skill
             };
 
-            _skillOptionList.Add(skillOption);
+            skillOptionList.Add(skillOption);
         }
 
-        for (int i = 0; i < _skillOptionList.Count; i++)
+        for (int i = 0; i < skillOptionList.Count; i++)
         {
-            UIObject.SetActive(true);
-            var button = Instantiate((GameObject)Resources.Load($"Prefabs/SkillButton")).GetComponent<Button>();
-            button.transform.SetParent(UIObject.transform);
-            button.name = $"skillButton{i}";
-            button.onClick.AddListener(() => OnClick(_skillOptionList[i]));
-            button.transform.position = new Vector2 { x = 0, y = 12.6f };
+            var so = new SkillOption
+            {
+                Button = Instantiate((GameObject)Resources.Load($"Prefabs/SkillButton")).GetComponent<Button>(),
+                Skill = skillOptionList[i].Skill,
+            };
+
+            so.Button.name = $"skillButton{i}";
+            so.Button.transform.position = new Vector3 { x = 32, y = (44.6f - (15f * i)), z = 0 };
+            so.Button.transform.SetParent(UIObject.transform);
+            so.Button.onClick.AddListener(() => OnClick(so));
+
+            //so.TextBox = 
+            //so.TextBox.text = skillOptionList[i].Skill.ShortName;
         }
 
         UIObject.SetActive(true);
