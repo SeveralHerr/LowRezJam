@@ -33,6 +33,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
     void Start()
     {
+        Score.Instance.LevelUpEvent.AddListener(LevelUp_Event);
         UIObject.SetActive(false);
     }
 
