@@ -22,13 +22,6 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
     public GameObject UIObject;
     public List<int> PreviousScores = new List<int> ();
 
-    public SkillOption option1;
-    public SkillOption option2;
-    public SkillOption option3;
-
-    public bool scoreTenRunOnce = false;
-    public bool scoreTwentyRunOnce = false;
-
     public SkillList SkillList;
 
     void Start()
@@ -70,6 +63,13 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
         Time.timeScale = 0;
 
         var skills = SkillList.GetThreeRandomSkills();
+
+        if (!skills.Any())
+        {
+            //todo: for some reason this causes the game to freeze when we've run out of skills.
+            //But, its either this or display the level up menu and not be able to close it.
+            return;
+        }
 
         var skillOptionList = new List<SkillOption>();
         foreach (var skill in skills)
