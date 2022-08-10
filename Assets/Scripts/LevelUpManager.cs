@@ -6,9 +6,10 @@ using UnityEngine.UI;
 using Zenject;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.Events;
 
 [Serializable]
-public class SkillOption
+public class SkillOption : Component
 {
     public Button Button;
     public Skill Skill { get; set; }
@@ -21,39 +22,12 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
     public GameObject UIObject;
     public List<int> PreviousScores = new List<int> ();
 
-    public SkillOption option1;
-    public SkillOption option2;
-    public SkillOption option3;
-
-    public bool scoreTenRunOnce = false;
-    public bool scoreTwentyRunOnce = false;
-
     public SkillList SkillList;
-
-    public Score score;
-
 
     void Start()
     {
-        option1.Button.onClick.AddListener(Button_Click1);
-        option2.Button.onClick.AddListener(Button_Click2);
-        option3.Button.onClick.AddListener(Button_Click3);
-
-        score.LevelUpEvent.AddListener(LevelUp_Event);
-
+        Score.Instance.LevelUpEvent.AddListener(LevelUp_Event);
         UIObject.SetActive(false);
-    }
-    private void Button_Click1( )
-    {
-        OnClick(option1);
-    }
-    private void Button_Click2()
-    {
-        OnClick(option2);
-    }
-    private void Button_Click3()
-    {
-        OnClick(option3);
     }
 
     private void OnClick(SkillOption skillOption)
@@ -68,7 +42,14 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
         SkillList.CompleteSkill(skillOption.Skill);
         skillOption.Skill.LearnSkill();
         
+        var skillBtnList = GameObject.FindGameObjectsWithTag("Button1");
+
         UIObject.SetActive(false);
+
+        foreach (var skillButton in skillBtnList)
+        {
+            Destroy(skillButton);
+        }
     }
 
     [Inject]
@@ -77,42 +58,47 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
         SkillList = skillList;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Score.Instance.currentScore % 20 == 0  && Score.Instance.currentScore != 0 && !PreviousScores.Any(x => x == Score.Instance.currentScore))
-        //{
-        //    PreviousScores.Add(Score.Instance.currentScore);
-        //    Time.timeScale = 0;
-
-        //    var skills = SkillList.GetThreeRandomSkills();
-
-        //    UIObject.SetActive(true);
-
-        //    option1.Skill = skills[0] ?? null;
-        //    option2.Skill = skills[1] ?? null;
-        //    option3.Skill = skills[2] ?? null;
-
-        //    option1.TextBox.text = option1.Skill?.ShortName ?? string.Empty;
-        //    option2.TextBox.text = option2.Skill?.ShortName ?? string.Empty;
-        //    option3.TextBox.text = option3.Skill?.ShortName ?? string.Empty;
-        //}
-    }
-
     private void LevelUp_Event()
     {
         Time.timeScale = 0;
 
         var skills = SkillList.GetThreeRandomSkills();
 
+        if (!skills.Any())
+        {
+            //todo: for some reason this causes the game to freeze when we've run out of skills.
+            //But, its either this or display the level up menu and not be able to close it.
+            return;
+        }
+
+        var skillOptionList = new List<SkillOption>();
+        foreach (var skill in skills)
+        {
+            var skillOption = new SkillOption
+            {
+                Skill = skill
+            };
+
+            skillOptionList.Add(skillOption);
+        }
+
+        for (int i = 0; i < skillOptionList.Count; i++)
+        {
+            var so = new SkillOption
+            {
+                Button = Instantiate((GameObject)Resources.Load($"Prefabs/SkillButton")).GetComponent<Button>(),
+                Skill = skillOptionList[i].Skill,
+            };
+
+            so.Button.name = $"skillButton{i}";
+            so.Button.transform.position = new Vector3 { x = 32, y = (44.6f - (15f * i)), z = 0 };
+            so.Button.transform.SetParent(UIObject.transform);
+            so.Button.onClick.AddListener(() => OnClick(so));
+
+            //so.TextBox = 
+            //so.TextBox.text = skillOptionList[i].Skill.ShortName;
+        }
+
         UIObject.SetActive(true);
-
-        option1.Skill = skills[0] ?? null;
-        option2.Skill = skills[1] ?? null;
-        option3.Skill = skills[2] ?? null;
-
-        option1.TextBox.text = option1.Skill?.ShortName ?? string.Empty;
-        option2.TextBox.text = option2.Skill?.ShortName ?? string.Empty;
-        option3.TextBox.text = option3.Skill?.ShortName ?? string.Empty;
     }
 }

@@ -157,7 +157,7 @@ public class SkillList
         {
             if(skills.Count() <= 0)
             {
-                randomSkillList.Add(null);
+                //randomSkillList.Add(null);
                 continue;
             }
 
@@ -169,7 +169,7 @@ public class SkillList
             randomSkillList.Add(randomSkill);
         }
 
-        return randomSkillList.Select(x => x.Skill).ToList();
+        return randomSkillList.Select(x => x.Skill ?? null).ToList();
     }
 
     public void CompleteSkill(Skill skill)
