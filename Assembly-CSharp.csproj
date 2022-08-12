@@ -104,6 +104,8 @@
     <Compile Include="Assets\Scripts\LevelUp.cs" />
     <Compile Include="Assets\Scripts\Skills\AttackSpeed.cs" />
     <Compile Include="Assets\Scripts\ControlsScreen.cs" />
+    <Compile Include="Assets\Scripts\BossSlime.cs" />
+    <Compile Include="Assets\Scripts\BossSlime2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

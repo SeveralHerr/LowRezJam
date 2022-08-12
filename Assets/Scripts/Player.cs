@@ -13,6 +13,8 @@ public class Player : SingletonUnitBase<Player>
     public bool HasPiercing = false;
     public float ProjectileAttackSpeed = 0.5f;
 
+    public bool IsPaused = false;
+
    // public SkillGroup SkillGroup;
 
     public Vector2 GetPosition()
@@ -29,6 +31,10 @@ public class Player : SingletonUnitBase<Player>
     // Update is called once per frame
     public override void Update()
     {
+        if(IsPaused)
+        {
+            return;
+        }
       
         if(Input.GetMouseButtonDown(0))
         {

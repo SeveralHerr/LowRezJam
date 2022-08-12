@@ -22,7 +22,11 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
     public GameObject UIObject;
     public List<int> PreviousScores = new List<int> ();
 
+    public List<SkillOption> skillOptions = new List<SkillOption>();
+
     public SkillList SkillList;
+
+    private ITimer Timer;
 
     void Start()
     {
@@ -32,7 +36,8 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
     private void OnClick(SkillOption skillOption)
     {
-        Time.timeScale = 1;
+        Player.Instance.IsPaused = false;
+
         if(skillOption.Skill == null)
         {
             UIObject.SetActive(false);
@@ -53,21 +58,22 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
     }
 
     [Inject]
-    public void Construct(SkillList skillList)
+    public void Construct(SkillList skillList, ITimer timer)
     {
         SkillList = skillList;
+        Timer = timer;
     }
 
     private void LevelUp_Event()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        Player.Instance.IsPaused = true;
 
         var skills = SkillList.GetThreeRandomSkills();
 
         if (!skills.Any())
         {
-            //todo: for some reason this causes the game to freeze when we've run out of skills.
-            //But, its either this or display the level up menu and not be able to close it.
+            //Time.timeScale = 1;
             return;
         }
 
@@ -84,21 +90,34 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
         for (int i = 0; i < skillOptionList.Count; i++)
         {
+            var obj = Instantiate((GameObject)Resources.Load($"Prefabs/SkillButton"));
             var so = new SkillOption
             {
-                Button = Instantiate((GameObject)Resources.Load($"Prefabs/SkillButton")).GetComponent<Button>(),
+                
+                Button = obj.GetComponent<Button>(),
                 Skill = skillOptionList[i].Skill,
+                TextBox = obj.GetComponentInChildren<TextMeshProUGUI>()
             };
 
             so.Button.name = $"skillButton{i}";
             so.Button.transform.position = new Vector3 { x = 32, y = (44.6f - (15f * i)), z = 0 };
             so.Button.transform.SetParent(UIObject.transform);
-            so.Button.onClick.AddListener(() => OnClick(so));
+            so.TextBox.text = so.Skill.ShortName;
+
+            skillOptions.Add(so);
 
             //so.TextBox = 
             //so.TextBox.text = skillOptionList[i].Skill.ShortName;
         }
 
         UIObject.SetActive(true);
+
+        Timer.RunTimer(5f, () =>
+        {
+            foreach (var so in skillOptions)
+            {
+                so.Button.onClick.AddListener(() => OnClick(so));
+            }
+        });
     }
 }

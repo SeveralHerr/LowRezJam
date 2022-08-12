@@ -34,6 +34,7 @@ public class GameInstaller : MonoInstaller
 
 
         Container.BindFactory<string, Enemy, Enemy.Factory>().FromFactory<PrefabResourceFactory<Enemy>>();
+        Container.BindFactory<string, BossSlime, BossSlime.Factory>().FromFactory<PrefabResourceFactory<BossSlime>>();
 
 
         Container.Bind<ITimer>().To<Timer>().AsTransient();

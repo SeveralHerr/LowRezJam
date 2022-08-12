@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour
         {
             Score.Instance.IncrementScore();
 
-            collision.gameObject.GetComponent<Enemy>().Dead();
+            collision.gameObject.GetComponent<UnitBase>().Dead();
 
             if(!Player.Instance.HasPiercing)
             {

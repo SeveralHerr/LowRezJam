@@ -22,6 +22,17 @@ public class UnitBase : MonoBehaviour
     {
        
     }
+
+    public void Dead()
+    {
+        StopMovement();
+        var animator = GetComponent<Animator>();
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<BoxCollider2D>().enabled = false;
+        animator.Play("SlimeDeath");
+        var length = animator.GetCurrentAnimatorStateInfo(0).length;
+        Destroy(gameObject, length + 1);
+    }
     public void MovePosition(Vector2 movement)
     {
         MovementBehavior.MovePosition(movement);
