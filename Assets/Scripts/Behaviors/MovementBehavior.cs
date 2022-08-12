@@ -13,6 +13,11 @@ public class MovementBehavior : MonoBehaviour
 
     public void MoveTowards(Vector2 position)
     {
+        if(Player.Instance.IsPaused)
+        {
+            rb.velocity = Vector2.zero;
+            return; 
+        }
         var move = new Vector2(position.x * MovementSpeed * Time.fixedDeltaTime, position.y * MovementSpeed * Time.fixedDeltaTime);
         rb.MovePosition(rb.position + move);
     }

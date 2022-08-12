@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 550156751}
   - component: {fileID: 550156754}
   - component: {fileID: 550156753}
+  - component: {fileID: 550156755}
   m_Layer: 0
   m_Name: StartScreen
   m_TagString: Untagged
@@ -252,6 +253,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550156747}
   m_CullTransparentMesh: 1
+--- !u!95 &550156755
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550156747}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04f7e3a5164f796468677b334da0089e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &784471746
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,4 +686,5 @@ MonoBehaviour:
   Button: {fileID: 2102647269}
   prefab: {fileID: 550156747}
   controlScreen: {fileID: 784471746}
+  animator: {fileID: 550156755}
   firstClick: 0

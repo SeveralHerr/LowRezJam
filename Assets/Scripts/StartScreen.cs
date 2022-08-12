@@ -9,6 +9,9 @@ public class StartScreen : MonoBehaviour
     public Button Button;
     public GameObject prefab;
     public GameObject controlScreen;
+    public Animator animator;
+
+    public Timer timer;
 
     public bool firstClick = false;
 
@@ -16,12 +19,13 @@ public class StartScreen : MonoBehaviour
     void Start()
     {
         Button.onClick.AddListener(Button_Click);
+        timer = new Timer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        timer.RunTimer(3f, () => animator.Play("StartScreen"));
     }
 
     private void Button_Click()
