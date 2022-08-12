@@ -20,11 +20,15 @@ public class SkillOption : Component
 public class LevelUpManager : MonoBehaviour//, IInitializable
 {
     public GameObject UIObject;
-    public List<int> PreviousScores = new List<int> ();
+    public List<int> PreviousScores = new List<int>();
 
     public List<SkillOption> skillOptions = new List<SkillOption>();
 
     public SkillList SkillList;
+
+
+    public bool IsActive = false;
+    public bool IsButtonsActive = false;
 
     private ITimer Timer;
 
@@ -34,11 +38,32 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
         UIObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (!IsActive)
+        {
+            return;
+        }
+
+        Timer.RunTimer(1f, () =>
+        {
+            if (IsButtonsActive)
+            {
+                return;
+            }
+            foreach (var so in skillOptions)
+            {
+                so.Button.onClick.AddListener(() => OnClick(so));
+            }
+            IsButtonsActive = true;
+        });
+    }
+
     private void OnClick(SkillOption skillOption)
     {
         Player.Instance.IsPaused = false;
 
-        if(skillOption.Skill == null)
+        if (skillOption.Skill == null)
         {
             UIObject.SetActive(false);
             return;
@@ -46,9 +71,11 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
         SkillList.CompleteSkill(skillOption.Skill);
         skillOption.Skill.LearnSkill();
-        
+
         var skillBtnList = GameObject.FindGameObjectsWithTag("Button1");
 
+        IsButtonsActive = false;
+        IsActive = false;
         UIObject.SetActive(false);
 
         foreach (var skillButton in skillBtnList)
@@ -93,7 +120,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
             var obj = Instantiate((GameObject)Resources.Load($"Prefabs/SkillButton"));
             var so = new SkillOption
             {
-                
+
                 Button = obj.GetComponent<Button>(),
                 Skill = skillOptionList[i].Skill,
                 TextBox = obj.GetComponentInChildren<TextMeshProUGUI>()
@@ -109,15 +136,8 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
             //so.TextBox = 
             //so.TextBox.text = skillOptionList[i].Skill.ShortName;
         }
+        IsActive = true;
 
         UIObject.SetActive(true);
-
-        Timer.RunTimer(5f, () =>
-        {
-            foreach (var so in skillOptions)
-            {
-                so.Button.onClick.AddListener(() => OnClick(so));
-            }
-        });
     }
 }
