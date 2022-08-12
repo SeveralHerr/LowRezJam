@@ -13,6 +13,8 @@ public class LevelUpEvent : UnityEvent
 public class Score : SingletonMonobehavior<Score>
 {
     public TextMeshProUGUI score;
+
+    [SerializeField]
     private int currentScore = 0;
 
     public LevelUpEvent LevelUpEvent;
@@ -28,7 +30,7 @@ public class Score : SingletonMonobehavior<Score>
         currentScore += 1;
         score.text = $"{currentScore}";
 
-        if(currentScore % 20 == 0)
+        if(currentScore % 50 == 0)
         {
             LevelUpEvent.Invoke();
         }
