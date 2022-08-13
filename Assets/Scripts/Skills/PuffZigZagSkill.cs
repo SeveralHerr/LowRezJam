@@ -5,7 +5,7 @@ using Zenject;
 
 public class PuffZigZagSkill : Skill
 {
-    public override string ShortName => "Puff+";
+    public override string ShortName => "Puff";
     private PuffballSkill PuffballSkill { get; set; }
 
     [Inject]

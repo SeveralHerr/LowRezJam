@@ -100,6 +100,7 @@
     <Compile Include="Assets\Scripts\Skills\AttackSpeed.cs" />
     <Compile Include="Assets\Scripts\RoseFactory.cs" />
     <Compile Include="Assets\Scripts\Skills\SkillFactory.cs" />
+    <Compile Include="Assets\Scripts\TestButton.cs" />
     <Compile Include="Assets\Scripts\Skills\RootSpikesSpawner.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
     <Compile Include="Assets\Scripts\Behaviors\MovementBehavior.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Assets\Scripts\Skills\PuffballSkill.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\LevelUp.cs" />
-    <Compile Include="Assets\Scripts\TestButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
