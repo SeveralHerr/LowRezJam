@@ -7,7 +7,7 @@ public class Fullscreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(640, 640, true);
+        Screen.SetResolution(64, 64, true);
     }
 
     // Update is called once per frame
