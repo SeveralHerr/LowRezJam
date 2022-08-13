@@ -117,7 +117,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
         for (int i = 0; i < skillOptionList.Count; i++)
         {
-            var obj = Instantiate((GameObject)Resources.Load($"Prefabs/NewNewSkillButton"));
+            var obj = Instantiate((GameObject)Resources.Load($"Prefabs/LevelUpButton"));
             var so = new SkillOption
             {
 
@@ -127,8 +127,9 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
             };
 
 
-            obj.transform.position = new Vector2(320, 240 - (i * 160));
-            obj.transform.SetParent(UIObject.transform);
+            obj.transform.position = new Vector2(3, 155 - (i * 120));
+            obj.transform.SetParent(UIObject.transform, false);
+            obj.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
             so.TextBox.text = so.Skill.ShortName;
 
             skillOptions.Add(so);

@@ -5,14 +5,21 @@ using UnityEngine.UI;
 public class TestButton : MonoBehaviour
 {
     public Button button;
-
     void Start()
     {
         button.onClick.AddListener(() => OnClick());
     }
 
-    private void OnClick()
+    public void OnClick()
     {
-        Debug.Log("Click");
+        Score.Instance.IncrementScore();
+        Score.Instance.IncrementScore();
+        Score.Instance.IncrementScore();
+        Score.Instance.IncrementScore();
+        Score.Instance.IncrementScore();
+        Score.Instance.IncrementScore();
+        Score.Instance.IncrementScore();
+        Score.Instance.IncrementScore();
+        Score.Instance.IncrementScore();
     }
 }

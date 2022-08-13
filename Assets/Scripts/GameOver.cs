@@ -12,17 +12,19 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Button.onClick.AddListener(Button_Click);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+        }
     }
 
     private void Button_Click()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+        
     }
 }
