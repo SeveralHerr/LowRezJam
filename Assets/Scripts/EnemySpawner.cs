@@ -39,7 +39,8 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        for (var i = 0; i < NextWaveCount; i++)
+        var random = UnityEngine.Random.Range(0, 5);
+        for (var i = 0; i < NextWaveCount+random; i++)
         {
             var slime = slimeFactory.Create();
             slime.Position = spawnPosition + GetRandomDir() * UnityEngine.Random.Range(0f, 10f);
