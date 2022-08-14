@@ -17,5 +17,7 @@ public class PuffPiercingSkill : Skill
     public override void LearnSkill()
     {
         PuffballSkill.IsPiercingEnabled = true;
+
+        Player.Instance.EnableHatThree();
     }
 }

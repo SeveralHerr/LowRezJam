@@ -15,7 +15,17 @@ public class Player : SingletonUnitBase<Player>
 
     public bool IsPaused = false;
 
-   // public SkillGroup SkillGroup;
+    public GameObject HatOne;
+    public GameObject HatTwo;
+    public GameObject HatThree;
+    public GameObject HatFour;
+
+    public Sprite blueGoobus;
+
+    public GameObject Tank;
+    public bool IsTankEnabled = false;
+
+    // public SkillGroup SkillGroup;
 
     public Vector2 GetPosition()
     {
@@ -35,16 +45,17 @@ public class Player : SingletonUnitBase<Player>
         {
             return;
         }
-      
-        if(Input.GetMouseButtonDown(0))
+
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+
+        if (Input.GetMouseButtonDown(0))
         {
             FireProjectile();
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-          levelUpPrefab.SetActive(true);
-        }
 
         if(Input.GetKeyDown(KeyCode.P))
         {
@@ -159,6 +170,40 @@ public class Player : SingletonUnitBase<Player>
     private void DisplayGameOverScreen()
     {
         gameOverPrefab.SetActive(true);
+    }
+
+    public void EnableHatOne()
+    {
+        HatOne.SetActive(true);
+    }
+    public void EnableHatTwo()
+    {
+        HatOne.SetActive(false);
+        HatTwo.SetActive(true);
+    }
+    public void EnableHatThree()
+    {
+        HatTwo.SetActive(false);
+        HatThree.SetActive(true);
+    }
+
+    public void EnableHatFour()
+    {
+        HatThree.SetActive(false);
+        HatFour.SetActive(true);
+    }
+
+    public void EnableBlueGoobus()
+    {
+        var renderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        renderer.sprite = blueGoobus;
+    }
+
+    public void EnableTank()
+    {
+        Tank.SetActive(true);
+        IsTankEnabled = true;
+        gameObject.GetComponentInChildren<GoobusFloater>().enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) 

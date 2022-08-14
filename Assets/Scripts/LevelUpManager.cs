@@ -45,7 +45,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
             return;
         }
 
-        Timer.RunTimer(1f, () =>
+        Timer.RunTimer(1.2f, () =>
         {
             if (IsButtonsActive)
             {
@@ -71,6 +71,7 @@ public class LevelUpManager : MonoBehaviour//, IInitializable
 
         SkillList.CompleteSkill(skillOption.Skill);
         skillOption.Skill.LearnSkill();
+        skillOptions = new List<SkillOption>();
 
         var skillBtnList = GameObject.FindGameObjectsWithTag("Button1");
 

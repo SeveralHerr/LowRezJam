@@ -15,5 +15,7 @@ public class RoseSkill : Skill, ISkill
     {
         var roseSpawnerPrefab = roseSpawnerFactory.Create();
         roseSpawnerPrefab.SetParent(Player.Instance.gameObject);
+
+        Player.Instance.EnableTank();
     }
 }
