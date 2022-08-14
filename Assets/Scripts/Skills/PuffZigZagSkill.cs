@@ -16,5 +16,7 @@ public class PuffZigZagSkill : Skill
     public override void LearnSkill()
     {
         PuffballSkill.IsZigZagEnabled = true;
+
+        Player.Instance.EnableHatTwo();
     }
 }

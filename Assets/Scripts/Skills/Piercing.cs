@@ -5,5 +5,7 @@ public class PiercingSkill : Skill
     public override void LearnSkill()
     {
         Player.Instance.HasPiercing = true;
+
+        Player.Instance.EnableBlueGoobus();
     }
 }
